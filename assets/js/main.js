@@ -104,16 +104,34 @@ function updateContent() {
 }
 
 function clickHandler(event) {
+	console.log(event);
 	if(event.target.localName == "p") { // Paragraph was clicked
 		var imgUrl = event.target.previousSibling.currentSrc;
 		var name = event.target.innerText;
+		// For IE
+		if(typeof imgUrl == "undefined") {
+			console.log("P Image is undefined");
+			imgUrl = event.target.previousSibling.href;
+		}
 	} else if (event.target.localName == "img") { // Image was clicked
 		var imgUrl = event.target.currentSrc;
 		var name = event.target.nextSibling.innerText;
+		// For IE
+		if(typeof imgUrl == "undefined") {
+			console.log("Img Image is undefined");
+			var imgUrl = event.target.href;
+		}
 	} else { // Div was clicked
 		var imgUrl = event.target.firstElementChild.currentSrc;
 		var name = event.target.innerText;
+		// For IE
+		if(typeof imgUrl == "undefined") {
+			console.log("Image is undefined");
+			var imgUrl = event.target.firstChild.href;
+		}
 	}
+	console.log(imgUrl);
+	console.log(name);
 	// for(let user of usersList) {
 	// 	if(imgUrl == user.picture.medium) {
 	// 		if(name == user.name.title + " " + user.name.first + " " + user.name.last) {
