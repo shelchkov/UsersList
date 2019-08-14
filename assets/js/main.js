@@ -92,9 +92,7 @@ function updateContent() {
 	// Change max-width for div.user
 	var divUsers = document.querySelectorAll("div.user");
 	var newMaxWidth = divUsers[0].offsetWidth;
-	// for(divUser of divUsers) {
-	// 	divUser.style.maxWidth = (newMaxWidth - 10) + "px";
-	// }
+
 	for(var i = 0; i < divUsers.length; i++) {
 		divUsers[i].style.maxWidth = (newMaxWidth - 10) + "px";
 	}
@@ -104,13 +102,11 @@ function updateContent() {
 }
 
 function clickHandler(event) {
-	console.log(event);
 	if(event.target.localName == "p") { // Paragraph was clicked
 		var imgUrl = event.target.previousSibling.currentSrc;
 		var name = event.target.innerText;
 		// For IE
 		if(typeof imgUrl == "undefined") {
-			console.log("P Image is undefined");
 			imgUrl = event.target.previousSibling.href;
 		}
 	} else if (event.target.localName == "img") { // Image was clicked
@@ -118,7 +114,6 @@ function clickHandler(event) {
 		var name = event.target.nextSibling.innerText;
 		// For IE
 		if(typeof imgUrl == "undefined") {
-			console.log("Img Image is undefined");
 			var imgUrl = event.target.href;
 		}
 	} else { // Div was clicked
@@ -126,20 +121,10 @@ function clickHandler(event) {
 		var name = event.target.innerText;
 		// For IE
 		if(typeof imgUrl == "undefined") {
-			console.log("Image is undefined");
 			var imgUrl = event.target.firstChild.href;
 		}
 	}
-	console.log(imgUrl);
-	console.log(name);
-	// for(let user of usersList) {
-	// 	if(imgUrl == user.picture.medium) {
-	// 		if(name == user.name.title + " " + user.name.first + " " + user.name.last) {
-	// 			showInfo(user);
-	// 			break;
-	// 		}
-	// 	}
-	// }
+
 	for(var i = 0; i < usersList.length; i++) {
 		var user = usersList[i];
 		if(imgUrl == user.picture.medium) {
