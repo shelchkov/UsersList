@@ -88,15 +88,28 @@ function updateContent() {
 			clickHandler(event);
 		}
 	}
+
+	// Change max-width for div.user
+	var divUsers = document.querySelectorAll("div.user");
+	var newMaxWidth = divUsers[0].offsetWidth;
+	for(divUser of divUsers) {
+		divUser.style.maxWidth = (newMaxWidth - 10) + "px";
+	}
+
+	// Make div.sort visible
+	document.querySelector("div.sort").style.visibility = "visible";
 }
 
 function clickHandler(event) {
-	if(event.target.className == "name") {
+	if(event.target.localName == "p") { // Paragraph was clicked
 		var imgUrl = event.target.previousSibling.currentSrc;
 		var name = event.target.innerText;
-	} else {
+	} else if (event.target.localName == "img") { // Image was clicked
 		var imgUrl = event.target.currentSrc;
 		var name = event.target.nextSibling.innerText;
+	} else { // Div was clicked
+		var imgUrl = event.target.firstElementChild.currentSrc;
+		var name = event.target.innerText;
 	}
 	for(let user of usersList) {
 		if(imgUrl == user.picture.medium) {
