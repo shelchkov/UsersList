@@ -22,8 +22,6 @@ div.users {
 div.row {
 	display: flex;
 	flex-direction: row;
-/*	flex-wrap: wrap;
-	width: 100%;*/
 }
 
 div.user {
@@ -35,8 +33,6 @@ div.user {
 	display: flex;
 	text-align: center;
 	flex-direction: column;
-	/*float: left;*/
-	/*flex-basis: 100%;*/
 	flex: 1;
 	color: #1C1D21;
 }
@@ -80,10 +76,8 @@ div.sort label {
 select#sort {
 	margin: .75rem 2rem .75rem .8rem;
 	padding: .5rem;
-	/*float: right;*/
 	background: #EEEFF7;
 	color: #445878;
-	/*outline: none;*/
 }
 
 select#sort:focus {
