@@ -1,5 +1,6 @@
+console.log("Connected");
 // Link to API
-var link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,name,location,email,phone,picture";
+var link = "http://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,name,location,email,phone,picture";
 
 var width = document.documentElement.clientWidth; // Page Width
 var numColumns = numOfCols(width); // Number of Columns
@@ -92,8 +93,11 @@ function updateContent() {
 	// Change max-width for div.user
 	var divUsers = document.querySelectorAll("div.user");
 	var newMaxWidth = divUsers[0].offsetWidth;
-	for(divUser of divUsers) {
-		divUser.style.maxWidth = (newMaxWidth - 10) + "px";
+	// for(divUser of divUsers) {
+	// 	divUser.style.maxWidth = (newMaxWidth - 10) + "px";
+	// }
+	for(var i = 0; i < divUsers.length; i++) {
+		divUsers[i].style.maxWidth = (newMaxWidth - 10) + "px";
 	}
 
 	// Make div.sort visible
@@ -111,7 +115,16 @@ function clickHandler(event) {
 		var imgUrl = event.target.firstElementChild.currentSrc;
 		var name = event.target.innerText;
 	}
-	for(let user of usersList) {
+	// for(let user of usersList) {
+	// 	if(imgUrl == user.picture.medium) {
+	// 		if(name == user.name.title + " " + user.name.first + " " + user.name.last) {
+	// 			showInfo(user);
+	// 			break;
+	// 		}
+	// 	}
+	// }
+	for(var i = 0; i < usersList.length; i++) {
+		var user = usersList[i];
 		if(imgUrl == user.picture.medium) {
 			if(name == user.name.title + " " + user.name.first + " " + user.name.last) {
 				showInfo(user);
