@@ -15,20 +15,19 @@ var select = document.querySelector("select#sort");
 select.onchange = function(event) { // Add Event Listener
 	sort = event.target.value; // New Value
 
-	if(sort == "alphabetically") {
+	if(sort === "alphabetically" || sort === "reverse") {
 		usersList.sort(function(a, b){
-			if(a["name"]["last"] < b["name"]["last"])
+			if(a["name"]["last"] + a["name"]["first"] < b["name"]["last"] + b["name"]["first"])
 				return -1;
-			else if(a["name"]["last"] > b["name"]["last"]) 
+			else if(a["name"]["last"] + a["name"]["first"] > b["name"]["last"] + b["name"]["first"]) 
 				return 1;
-			else if(a["name"]["first"] < b["name"]["first"])
-				return -1;
-			return 1;
-		})
-	}	else if (sort == "reverse") {
-		usersList.reverse();
+			return 0;
+		});
+		if (sort == "reverse") {
+			usersList.reverse();
+		}
+		updateContent();
 	}
-	updateContent();
 };
 
 var usersList = [];
