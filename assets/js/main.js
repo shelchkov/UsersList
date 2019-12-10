@@ -67,10 +67,10 @@ function updateContent() {
 		if(i % numColumns == 0 && i != 0) {
 			html += '</div><div class="row">';
 		}
-		var user_html = '<div class="user" title="Show More Info">';
+		var user_html = '<article class="user" title="Show More Info">';
 		user_html += ('<img src="' + user["picture"]["medium"] + '">');
 		user_html += ('<p class="name">' + user["name"]["title"] + " " + user["name"]["first"] + " " + user["name"]["last"] + '</p>');
-		user_html += '</div>';
+		user_html += '</article>';
 		html += user_html;
 	});
 	html += "</div>";
@@ -78,7 +78,7 @@ function updateContent() {
 	document.querySelector("h1").innerHTML = "Пользователи";
 
 	// Click Event Listener
-	var userDivs = document.querySelectorAll("div.user");
+	var userDivs = document.querySelectorAll(".user");
 	for(var i = 0; i < userDivs.length; i++) {
 		userDivs[i].onclick = function(event) {
 			document.querySelector(".wrapper").setAttribute("visibility", "visible");
@@ -88,8 +88,8 @@ function updateContent() {
 		}
 	}
 
-	// Change max-width for div.user
-	var divUsers = document.querySelectorAll("div.user");
+	// Change max-width for .user
+	var divUsers = document.querySelectorAll(".user");
 	var newMaxWidth = divUsers[0].offsetWidth;
 
 	for(var i = 0; i < divUsers.length; i++) {

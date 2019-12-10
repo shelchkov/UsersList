@@ -24,7 +24,7 @@ div.row {
 	flex-direction: row;
 }
 
-div.user {
+.user {
 	max-width: 115px;
 	background: #92CDCF;
 	border-radius: 5px;
@@ -37,7 +37,7 @@ div.user {
 	color: #1C1D21;
 }
 
-div.user:hover {
+.user:hover {
 	/* Zoom In */
 	-webkit-transform: scale(1.1);
 	-ms-transform: scale(1.1);
@@ -52,12 +52,12 @@ div.user:hover {
 	cursor: pointer;
 }
 
-div.user p {
+.user p {
 	margin-top: 8px;
 	margin-bottom: 24px;
 }
 
-div.user img {
+.user img {
 	display: block;
 	margin: auto;
 }
