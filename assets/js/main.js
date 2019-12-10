@@ -41,11 +41,9 @@ ajax_get(link, function(data) { // Load Users List
 
 
 function ajax_get(url, callback) {
-	// Создаём новый объект XMLHttpRequest
 	var xmlhttp = new XMLHttpRequest();
-	// Добавляем Event Listener, который вызовет callback function
 	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) { // Если код ответа сервера не 200, то это ошибка
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 		try {
 			var data = JSON.parse(xmlhttp.responseText);
 		} catch(err) {
@@ -55,9 +53,7 @@ function ajax_get(url, callback) {
 		callback(data);
 		}
 	};
-	// Конфигурируем асинхронный GET-запрос на URL
 	xmlhttp.open("GET", url, true);
-	// Отсылаем запрос
 	xmlhttp.send();
 }
 
