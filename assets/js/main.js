@@ -150,7 +150,7 @@ function showInfo(user) {
 	infoBlock.innerHTML = userInfo;
 
 	document.querySelector("p#closeWindow").onclick = function() {
-		infoBlock.style.zIndex = "-1";
+		// infoBlock.style.zIndex = "-1";
 		infoBlock.setAttribute("visibility", "hidden");
 		document.querySelector(".wrapper").setAttribute("visibility", "hidden");
 		document.querySelector(".wrapper").style.zIndex = "-1";
