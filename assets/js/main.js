@@ -84,6 +84,7 @@ function updateContent() {
 			document.querySelector(".wrapper").setAttribute("visibility", "visible");
 			document.querySelector(".info").setAttribute("visibility", "visible");
 			document.querySelector(".wrapper").style.zIndex = "1";
+			document.querySelector(".wrapper").style.opacity = 1;
 			clickHandler(event);
 		}
 	}
@@ -155,6 +156,7 @@ function showInfo(user) {
 		document.querySelector(".wrapper").setAttribute("visibility", "hidden");
 		document.querySelector(".wrapper").style.zIndex = "-1";
 		infoBlock.style.opacity = 0;
+		document.querySelector(".wrapper").style.opacity = 0;
 	}
 }
 
