@@ -35,6 +35,9 @@ div.user {
 	flex-direction: column;
 	flex: 1;
 	color: #1C1D21;
+	-webkit-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
+	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
+	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 }
 
 div.user:hover {
