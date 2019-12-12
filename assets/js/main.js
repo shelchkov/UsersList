@@ -64,7 +64,8 @@ function updateContent() {
 			html += '</div><div class="row">';
 		}
 		var user_html = '<article class="user" title="Show More Info">';
-		user_html += ('<img src="' + user["picture"]["medium"] + '">');
+		user_html += ('<img src="' + user["picture"]["medium"] + 
+			'" alt="' + `${user.name.title} ${user.name.last}` + '">');
 		user_html += ('<p class="name">' + user["name"]["title"] + " " + user["name"]["first"] + " " + user["name"]["last"] + '</p>');
 		user_html += '</article>';
 		html += user_html;
@@ -138,7 +139,7 @@ function showInfo(user) {
 	infoBlock.style.opacity = 1;
 	var userInfo = "";
 	userInfo += '<p id="closeWindow" title="Close">X</p>';
-	userInfo += '<img src="' + user["picture"]["large"] + '">';
+	userInfo += '<img src="' + user["picture"]["large"] + '" alt="' + user.name.title + ' ' + user.name.last + '">';
 	var location = user["location"]["street"] + ', ' + user["location"]["city"] + ", " + user["location"]["state"];
 	userInfo += '<p><img class="icon" src="assets/icons/marker.png">' + location + '</p>';
 	userInfo += '<p><img class="icon" src="assets/icons/email.png">' + user["email"] + '</p>';
