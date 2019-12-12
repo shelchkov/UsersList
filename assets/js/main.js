@@ -77,9 +77,11 @@ function updateContent() {
 	var userDivs = document.querySelectorAll(".user");
 	for(var i = 0; i < userDivs.length; i++) {
 		userDivs[i].onclick = function(event) {
-			document.querySelector(".wrapper").setAttribute("visibility", "visible");
+			const wrapper = document.querySelector(".wrapper");
+			wrapper.setAttribute("visibility", "visible");
 			document.querySelector(".info").setAttribute("visibility", "visible");
-			document.querySelector(".wrapper").style.zIndex = "1";
+			wrapper.style.zIndex = "1";
+			wrapper.style.opacity = 1;
 			clickHandler(event);
 		}
 	}
@@ -148,9 +150,11 @@ function showInfo(user) {
 	document.querySelector("p#closeWindow").onclick = function() {
 		infoBlock.style.zIndex = "-1";
 		infoBlock.setAttribute("visibility", "hidden");
-		document.querySelector(".wrapper").setAttribute("visibility", "hidden");
-		document.querySelector(".wrapper").style.zIndex = "-1";
+		const wrapper = document.querySelector(".wrapper")
+		wrapper.setAttribute("visibility", "hidden");
+		wrapper.style.zIndex = "-1";
 		infoBlock.style.opacity = 0;
+		wrapper.style.opacity = 0;
 	}
 }
 
