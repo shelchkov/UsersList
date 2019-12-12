@@ -41,11 +41,9 @@ ajax_get(link, function(data) { // Load Users List
 
 
 function ajax_get(url, callback) {
-	// Создаём новый объект XMLHttpRequest
 	var xmlhttp = new XMLHttpRequest();
-	// Добавляем Event Listener, который вызовет callback function
 	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) { // Если код ответа сервера не 200, то это ошибка
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 		try {
 			var data = JSON.parse(xmlhttp.responseText);
 		} catch(err) {
@@ -55,9 +53,7 @@ function ajax_get(url, callback) {
 		callback(data);
 		}
 	};
-	// Конфигурируем асинхронный GET-запрос на URL
 	xmlhttp.open("GET", url, true);
-	// Отсылаем запрос
 	xmlhttp.send();
 }
 
@@ -67,11 +63,11 @@ function updateContent() {
 		if(i % numColumns == 0 && i != 0) {
 			html += '</div><div class="row">';
 		}
-		var user_html = '<div class="user" title="Show More Info">';
+		var user_html = '<article class="user" title="Show More Info">';
 		user_html += ('<img src="' + user["picture"]["medium"] + 
 			'" alt="' + `${user.name.title} ${user.name.last}` + '">');
 		user_html += ('<p class="name">' + user["name"]["title"] + " " + user["name"]["first"] + " " + user["name"]["last"] + '</p>');
-		user_html += '</div>';
+		user_html += '</article>';
 		html += user_html;
 	});
 	html += "</div>";
@@ -79,18 +75,20 @@ function updateContent() {
 	document.querySelector("h1").innerHTML = "Пользователи";
 
 	// Click Event Listener
-	var userDivs = document.querySelectorAll("div.user");
+	var userDivs = document.querySelectorAll(".user");
 	for(var i = 0; i < userDivs.length; i++) {
 		userDivs[i].onclick = function(event) {
-			document.querySelector(".wrapper").setAttribute("visibility", "visible");
+			const wrapper = document.querySelector(".wrapper");
+			wrapper.setAttribute("visibility", "visible");
 			document.querySelector(".info").setAttribute("visibility", "visible");
-			document.querySelector(".wrapper").style.zIndex = "1";
+			wrapper.style.zIndex = "1";
+			wrapper.style.opacity = 1;
 			clickHandler(event);
 		}
 	}
 
-	// Change max-width for div.user
-	var divUsers = document.querySelectorAll("div.user");
+	// Change max-width for .user
+	var divUsers = document.querySelectorAll(".user");
 	var newMaxWidth = divUsers[0].offsetWidth;
 
 	for(var i = 0; i < divUsers.length; i++) {
@@ -150,12 +148,13 @@ function showInfo(user) {
 	userInfo += '<p><img class="icon" src="assets/icons/person.png">' + userName + '</p>';
 	infoBlock.innerHTML = userInfo;
 
-	document.querySelector("p#closeWindow").onclick = function() {
-		infoBlock.style.zIndex = "-1";
+	document.querySelector("#closeWindow").onclick = function() {
 		infoBlock.setAttribute("visibility", "hidden");
-		document.querySelector(".wrapper").setAttribute("visibility", "hidden");
-		document.querySelector(".wrapper").style.zIndex = "-1";
+		const wrapper = document.querySelector(".wrapper")
+		wrapper.setAttribute("visibility", "hidden");
+		wrapper.style.zIndex = "-1";
 		infoBlock.style.opacity = 0;
+		wrapper.style.opacity = 0;
 	}
 }
 
