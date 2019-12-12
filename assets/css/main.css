@@ -24,7 +24,7 @@ div.row {
 	flex-direction: row;
 }
 
-div.user {
+.user {
 	max-width: 115px;
 	background: #92CDCF;
 	border-radius: 5px;
@@ -35,9 +35,12 @@ div.user {
 	flex-direction: column;
 	flex: 1;
 	color: #1C1D21;
+	-webkit-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
+	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
+	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 }
 
-div.user:hover {
+.user:hover {
 	/* Zoom In */
 	-webkit-transform: scale(1.1);
 	-ms-transform: scale(1.1);
@@ -52,12 +55,12 @@ div.user:hover {
 	cursor: pointer;
 }
 
-div.user p {
+.user p {
 	margin-top: 8px;
 	margin-bottom: 24px;
 }
 
-div.user img {
+.user img {
 	display: block;
 	margin: auto;
 }
@@ -122,12 +125,12 @@ div.info {
 div.info p#closeWindow {
 	background: #31353D;
 	margin-left: auto;
-	margin-top: 10px;
+	margin-top: 0;
 	margin-bottom: 5px;
 	width: 10%;
 	font-size: 1.2rem;
 	padding: .2rem .3rem;
-	border-radius: 5px 0 0 5px;
+	border-radius: 0 0 0 2px;
 }
 
 div.info p#closeWindow:hover {
