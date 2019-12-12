@@ -149,8 +149,7 @@ function showInfo(user) {
 	userInfo += '<p><img class="icon" src="assets/icons/person.png">' + userName + '</p>';
 	infoBlock.innerHTML = userInfo;
 
-	document.querySelector("p#closeWindow").onclick = function() {
-		// infoBlock.style.zIndex = "-1";
+	document.querySelector("#closeWindow").onclick = function() {
 		infoBlock.setAttribute("visibility", "hidden");
 		document.querySelector(".wrapper").setAttribute("visibility", "hidden");
 		document.querySelector(".wrapper").style.zIndex = "-1";
