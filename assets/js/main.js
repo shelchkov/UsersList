@@ -72,7 +72,7 @@ function updateContent() {
 	});
 	html += "</div>";
 	document.querySelector("div.users").innerHTML = html;
-	document.querySelector("h1").innerHTML = "Пользователи";
+	document.querySelector("h1").innerHTML = "List of 50 Users";
 
 	// Click Event Listener
 	var userDivs = document.querySelectorAll(".user");
