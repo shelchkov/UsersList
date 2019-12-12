@@ -115,6 +115,7 @@ div.info {
 	vertical-align: middle;
 	height: 400px;
 	opacity: 0;
+	overflow: hidden;
 
 	/* Shadow */
 	-webkit-box-shadow: 0px 0px 258px 38px rgba(46,61,89,0.86);
@@ -128,12 +129,12 @@ div.info {
 div.info p#closeWindow {
 	background: #31353D;
 	margin-left: auto;
-	margin-top: 10px;
+	margin-top: 0;
 	margin-bottom: 5px;
 	width: 10%;
 	font-size: 1.2rem;
 	padding: .2rem .3rem;
-	border-radius: 5px 0 0 5px;
+	border-radius: 0 0 0 2px;
 }
 
 div.info p#closeWindow:hover {
