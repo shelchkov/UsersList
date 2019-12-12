@@ -148,13 +148,16 @@ function showInfo(user) {
 	userInfo += '<p><img class="icon" src="assets/icons/person.png">' + userName + '</p>';
 	infoBlock.innerHTML = userInfo;
 
-	document.querySelector("#closeWindow").onclick = function() {
-		infoBlock.setAttribute("visibility", "hidden");
-		const wrapper = document.querySelector(".wrapper")
-		wrapper.setAttribute("visibility", "hidden");
-		wrapper.style.zIndex = "-1";
-		infoBlock.style.opacity = 0;
-		wrapper.style.opacity = 0;
+	const closeObjects = document.querySelectorAll("#closeWindow");
+	for (closeObj of closeObjects) {
+		closeObj.onclick = function() {
+			infoBlock.setAttribute("visibility", "hidden");
+			const wrapper = document.querySelector(".wrapper")
+			wrapper.setAttribute("visibility", "hidden");
+			wrapper.style.zIndex = "-1";
+			infoBlock.style.opacity = 0;
+			wrapper.style.opacity = 0;
+		}
 	}
 }
 
