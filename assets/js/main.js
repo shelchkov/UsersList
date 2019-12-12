@@ -64,7 +64,8 @@ function updateContent() {
 			html += '</div><div class="row">';
 		}
 		var user_html = '<article class="user" title="Show More Info">';
-		user_html += ('<img src="' + user["picture"]["medium"] + '">');
+		user_html += ('<img src="' + user["picture"]["medium"] + 
+			'" alt="' + `${user.name.title} ${user.name.last}` + '">');
 		user_html += ('<p class="name">' + user["name"]["title"] + " " + user["name"]["first"] + " " + user["name"]["last"] + '</p>');
 		user_html += '</article>';
 		html += user_html;
@@ -77,9 +78,11 @@ function updateContent() {
 	var userDivs = document.querySelectorAll(".user");
 	for(var i = 0; i < userDivs.length; i++) {
 		userDivs[i].onclick = function(event) {
-			document.querySelector(".wrapper").setAttribute("visibility", "visible");
+			const wrapper = document.querySelector(".wrapper");
+			wrapper.setAttribute("visibility", "visible");
 			document.querySelector(".info").setAttribute("visibility", "visible");
-			document.querySelector(".wrapper").style.zIndex = "1";
+			wrapper.style.zIndex = "1";
+			wrapper.style.opacity = 1;
 			clickHandler(event);
 		}
 	}
@@ -136,7 +139,7 @@ function showInfo(user) {
 	infoBlock.style.opacity = 1;
 	var userInfo = "";
 	userInfo += '<p id="closeWindow" title="Close">X</p>';
-	userInfo += '<img src="' + user["picture"]["large"] + '">';
+	userInfo += '<img src="' + user["picture"]["large"] + '" alt="' + user.name.title + ' ' + user.name.last + '">';
 	var location = user["location"]["street"] + ', ' + user["location"]["city"] + ", " + user["location"]["state"];
 	userInfo += '<p><img class="icon" src="assets/icons/marker.png">' + location + '</p>';
 	userInfo += '<p><img class="icon" src="assets/icons/email.png">' + user["email"] + '</p>';
@@ -145,12 +148,13 @@ function showInfo(user) {
 	userInfo += '<p><img class="icon" src="assets/icons/person.png">' + userName + '</p>';
 	infoBlock.innerHTML = userInfo;
 
-	document.querySelector("p#closeWindow").onclick = function() {
-		infoBlock.style.zIndex = "-1";
+	document.querySelector("#closeWindow").onclick = function() {
 		infoBlock.setAttribute("visibility", "hidden");
-		document.querySelector(".wrapper").setAttribute("visibility", "hidden");
-		document.querySelector(".wrapper").style.zIndex = "-1";
+		const wrapper = document.querySelector(".wrapper")
+		wrapper.setAttribute("visibility", "hidden");
+		wrapper.style.zIndex = "-1";
 		infoBlock.style.opacity = 0;
+		wrapper.style.opacity = 0;
 	}
 }
 
