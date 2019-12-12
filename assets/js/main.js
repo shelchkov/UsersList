@@ -33,8 +33,7 @@ select.onchange = function(event) { // Add Event Listener
 var usersList = [];
 ajax_get(link, function(data) { // Load Users List
 	for(var i = 0; i < data["results"].length; i++) {
-		var user = data["results"][i];
-		usersList[usersList.length] = user;
+		usersList[usersList.length] = data["results"][i];
 	}
 	updateContent();
 });
@@ -58,15 +57,17 @@ function ajax_get(url, callback) {
 }
 
 function updateContent() {
-	var html = '<div class="row">';
+	console.log(usersList);
+	let html = '<div class="row">';
 	usersList.forEach(function(user, i) {
 		if(i % numColumns == 0 && i != 0) {
 			html += '</div><div class="row">';
 		}
-		var user_html = '<article class="user" title="Show More Info">';
-		user_html += ('<img src="' + user["picture"]["medium"] + 
+		let user_html = '<article class="user" title="Show More Info">';
+		user_html += ('<img src="' + user["picture"]["large"] + 
 			'" alt="' + `${user.name.title} ${user.name.last}` + '">');
-		user_html += ('<p class="name">' + user["name"]["title"] + " " + user["name"]["first"] + " " + user["name"]["last"] + '</p>');
+		user_html += ('<p class="name">' + user["name"]["title"] + " " + 
+			user["name"]["first"] + " " + user["name"]["last"] + '</p>');
 		user_html += '</article>';
 		html += user_html;
 	});
@@ -78,7 +79,7 @@ function updateContent() {
 	var userDivs = document.querySelectorAll(".user");
 	for(var i = 0; i < userDivs.length; i++) {
 		userDivs[i].onclick = function(event) {
-			const wrapper = document.querySelector(".wrapper");
+			let wrapper = document.querySelector(".wrapper");
 			wrapper.setAttribute("visibility", "visible");
 			document.querySelector(".info").setAttribute("visibility", "visible");
 			wrapper.style.zIndex = "1";
@@ -100,6 +101,7 @@ function updateContent() {
 }
 
 function clickHandler(event) {
+	console.log(event);
 	if(event.target.localName == "p") { // Paragraph was clicked
 		var imgUrl = event.target.previousSibling.currentSrc;
 		var name = event.target.innerText;
@@ -124,7 +126,7 @@ function clickHandler(event) {
 	}
 
 	for(var i = 0; i < usersList.length; i++) {
-		var user = usersList[i];
+		let user = usersList[i];
 		if(imgUrl == user.picture.medium) {
 			if(name == user.name.title + " " + user.name.first + " " + user.name.last) {
 				showInfo(user);
@@ -135,9 +137,10 @@ function clickHandler(event) {
 }
 
 function showInfo(user) {
-	var infoBlock = document.querySelector("div.info");
+	console.log("Show info");
+	let infoBlock = document.querySelector("div.info");
 	infoBlock.style.opacity = 1;
-	var userInfo = "";
+	let userInfo = "";
 	userInfo += '<p id="closeWindow" title="Close">X</p>';
 	userInfo += '<img src="' + user["picture"]["large"] + '" alt="' + user.name.title + ' ' + user.name.last + '">';
 	var location = user["location"]["street"] + ', ' + user["location"]["city"] + ", " + user["location"]["state"];
@@ -150,7 +153,7 @@ function showInfo(user) {
 
 	document.querySelector("#closeWindow").onclick = function() {
 		infoBlock.setAttribute("visibility", "hidden");
-		const wrapper = document.querySelector(".wrapper")
+		let wrapper = document.querySelector(".wrapper")
 		wrapper.setAttribute("visibility", "hidden");
 		wrapper.style.zIndex = "-1";
 		infoBlock.style.opacity = 0;

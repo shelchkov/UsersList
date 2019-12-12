@@ -25,10 +25,10 @@ div.row {
 }
 
 .user {
-	max-width: 115px;
+	max-width: 128px;
 	background: #98B8C0;
 	border-radius: 5px;
-	padding: 15px 5px 0 5px;
+	padding: 0 0 5px 0;
 	margin: 10px;
 	display: flex;
 	text-align: center;
@@ -37,6 +37,7 @@ div.row {
 	-webkit-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
+	overflow: hidden;
 }
 
 .user:hover {
@@ -61,7 +62,8 @@ div.row {
 
 .user img {
 	display: block;
-	margin: auto;
+	margin: 0;
+	width: 100%;
 }
 
 div.sort {
