@@ -34,7 +34,6 @@ div.row {
 	text-align: center;
 	flex-direction: column;
 	flex: 1;
-	/*color: #1C1D21;*/
 	-webkit-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
@@ -73,7 +72,6 @@ div.sort {
 div.sort label {
 	margin-left: auto;
 	margin-top: 1.2rem;
-	/*color: #445878;*/
 }
 
 select#sort {
@@ -109,7 +107,6 @@ div.info {
 	-ms-transform: translate(-50%, -50%); /* for IE 9 */
 	-webkit-transform: translate(-50%, -50%); /* for Safari */
 	background: #F1ECE0;
-	/*color: #EEEFF7;*/
 	text-align: center;
 	width: 300px;
 	vertical-align: middle;
