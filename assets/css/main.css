@@ -117,6 +117,7 @@ div.info {
 	opacity: 0;
 	font-size: .9rem;
 	border-radius: 10px;
+	overflow: hidden;
 }
 
 div.info p#closeWindow {
@@ -127,7 +128,7 @@ div.info p#closeWindow {
 	margin-bottom: 5px;
 	width: 10%;
 	font-size: 1.2rem;
-	padding: .2rem .3rem;
+	padding: .3rem .5rem;
 	border-radius: 0 0 0 2px;
 }
 
