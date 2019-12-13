@@ -33,8 +33,7 @@ select.onchange = function(event) { // Add Event Listener
 var usersList = [];
 ajax_get(link, function(data) { // Load Users List
 	for(var i = 0; i < data["results"].length; i++) {
-		var user = data["results"][i];
-		usersList[usersList.length] = user;
+		usersList[usersList.length] = data["results"][i];
 	}
 	updateContent();
 });
@@ -58,15 +57,16 @@ function ajax_get(url, callback) {
 }
 
 function updateContent() {
-	var html = '<div class="row">';
+	let html = '<div class="row">';
 	usersList.forEach(function(user, i) {
 		if(i % numColumns == 0 && i != 0) {
 			html += '</div><div class="row">';
 		}
-		var user_html = '<article class="user" title="Show More Info">';
-		user_html += ('<img src="' + user["picture"]["medium"] + 
+		let user_html = '<article class="user" title="Show More Info">';
+		user_html += ('<img src="' + user["picture"]["large"] + 
 			'" alt="' + `${user.name.title} ${user.name.last}` + '">');
-		user_html += ('<p class="name">' + user["name"]["title"] + " " + user["name"]["first"] + " " + user["name"]["last"] + '</p>');
+		user_html += ('<p class="name">' + user["name"]["title"] + " " + 
+			user["name"]["first"] + " " + user["name"]["last"] + '</p>');
 		user_html += '</article>';
 		html += user_html;
 	});
@@ -124,7 +124,7 @@ function clickHandler(event) {
 	}
 
 	for(var i = 0; i < usersList.length; i++) {
-		var user = usersList[i];
+		let user = usersList[i];
 		if(imgUrl == user.picture.medium) {
 			if(name == user.name.title + " " + user.name.first + " " + user.name.last) {
 				showInfo(user);
@@ -135,9 +135,9 @@ function clickHandler(event) {
 }
 
 function showInfo(user) {
-	var infoBlock = document.querySelector("div.info");
+	let infoBlock = document.querySelector("div.info");
 	infoBlock.style.opacity = 1;
-	var userInfo = "";
+	let userInfo = "";
 	userInfo += '<p id="closeWindow" title="Close">X</p>';
 	userInfo += '<img src="' + user["picture"]["large"] + '" alt="' + user.name.title + ' ' + user.name.last + '">';
 	var location = user["location"]["street"] + ', ' + user["location"]["city"] + ", " + user["location"]["state"];
