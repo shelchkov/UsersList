@@ -57,7 +57,6 @@ function ajax_get(url, callback) {
 }
 
 function updateContent() {
-	console.log(usersList);
 	let html = '<div class="row">';
 	usersList.forEach(function(user, i) {
 		if(i % numColumns == 0 && i != 0) {
@@ -79,7 +78,7 @@ function updateContent() {
 	var userDivs = document.querySelectorAll(".user");
 	for(var i = 0; i < userDivs.length; i++) {
 		userDivs[i].onclick = function(event) {
-			let wrapper = document.querySelector(".wrapper");
+			const wrapper = document.querySelector(".wrapper");
 			wrapper.setAttribute("visibility", "visible");
 			document.querySelector(".info").setAttribute("visibility", "visible");
 			wrapper.style.zIndex = "1";
@@ -101,7 +100,6 @@ function updateContent() {
 }
 
 function clickHandler(event) {
-	console.log(event);
 	if(event.target.localName == "p") { // Paragraph was clicked
 		var imgUrl = event.target.previousSibling.currentSrc;
 		var name = event.target.innerText;
@@ -137,7 +135,6 @@ function clickHandler(event) {
 }
 
 function showInfo(user) {
-	console.log("Show info");
 	let infoBlock = document.querySelector("div.info");
 	infoBlock.style.opacity = 1;
 	let userInfo = "";
@@ -153,7 +150,7 @@ function showInfo(user) {
 
 	document.querySelector("#closeWindow").onclick = function() {
 		infoBlock.setAttribute("visibility", "hidden");
-		let wrapper = document.querySelector(".wrapper")
+		const wrapper = document.querySelector(".wrapper")
 		wrapper.setAttribute("visibility", "hidden");
 		wrapper.style.zIndex = "-1";
 		infoBlock.style.opacity = 0;
