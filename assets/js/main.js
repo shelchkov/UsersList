@@ -30,6 +30,14 @@ select.onchange = function(event) { // Add Event Listener
 	}
 };
 
+const showModal = () => {
+	const wrapper = document.querySelector(".wrapper");
+	wrapper.setAttribute("visibility", "visible");
+	document.querySelector(".info").setAttribute("visibility", "visible");
+	wrapper.style.zIndex = "1";
+	wrapper.style.opacity = 1;
+}
+
 var usersList = [];
 ajax_get(link, function(data) { // Load Users List
 	for(var i = 0; i < data["results"].length; i++) {
@@ -62,7 +70,8 @@ function updateContent() {
 		if(i % numColumns == 0 && i != 0) {
 			html += '</div><div class="row">';
 		}
-		let user_html = '<article class="user" title="Show More Info">';
+		let user_html = 
+			`<article class="user user--${i}" title="Show More Info">`;
 		user_html += ('<img src="' + user["picture"]["large"] + 
 			'" alt="' + `${user.name.title} ${user.name.last}` + '">');
 		user_html += ('<p class="name">' + user["name"]["title"] + " " + 
@@ -75,15 +84,10 @@ function updateContent() {
 	document.querySelector("h1").innerHTML = "List of 50 Users";
 
 	// Click Event Listener
-	var userDivs = document.querySelectorAll(".user");
-	for(var i = 0; i < userDivs.length; i++) {
-		userDivs[i].onclick = function(event) {
-			const wrapper = document.querySelector(".wrapper");
-			wrapper.setAttribute("visibility", "visible");
-			document.querySelector(".info").setAttribute("visibility", "visible");
-			wrapper.style.zIndex = "1";
-			wrapper.style.opacity = 1;
-			clickHandler(event);
+	var userCards = document.querySelectorAll(".user");
+	for(var i = 0; i < userCards.length; i++) {
+		userCards[i].onclick = function(event) {
+			userCardClickHandler(event);
 		}
 	}
 
@@ -99,39 +103,33 @@ function updateContent() {
 	document.querySelector("div.sort").style.visibility = "visible";
 }
 
-function clickHandler(event) {
-	if(event.target.localName == "p") { // Paragraph was clicked
-		var imgUrl = event.target.previousSibling.currentSrc;
-		var name = event.target.innerText;
-		// For IE
-		if(typeof imgUrl == "undefined") {
-			imgUrl = event.target.previousSibling.href;
-		}
-	} else if (event.target.localName == "img") { // Image was clicked
-		var imgUrl = event.target.currentSrc;
-		var name = event.target.nextSibling.innerText;
-		// For IE
-		if(typeof imgUrl == "undefined") {
-			var imgUrl = event.target.href;
-		}
-	} else { // Div was clicked
-		var imgUrl = event.target.firstElementChild.currentSrc;
-		var name = event.target.innerText;
-		// For IE
-		if(typeof imgUrl == "undefined") {
-			var imgUrl = event.target.firstChild.href;
-		}
-	}
+function userCardClickHandler(event) {
+	let userNumber = undefined;
+	for (element of event.path) {
+		const classList = element.classList;
+		if (!classList.length) continue;
 
-	for(var i = 0; i < usersList.length; i++) {
-		let user = usersList[i];
-		if(imgUrl == user.picture.medium) {
-			if(name == user.name.title + " " + user.name.first + " " + user.name.last) {
-				showInfo(user);
+		let foundClass = undefined;
+
+		for (elementClass of classList) {
+			if (elementClass.includes("user--")) {
+				foundClass = elementClass;
 				break;
 			}
 		}
+
+		if (!foundClass) continue;
+
+		userNumber = parseInt(foundClass.split("--")[1]);
+		break;
 	}
+
+	if(userNumber === undefined) {
+		throw("Something went wrong while trying to select user");
+		return;
+	}
+
+	showInfo(usersList[userNumber]);
 }
 
 function showInfo(user) {
@@ -159,6 +157,8 @@ function showInfo(user) {
 			wrapper.style.opacity = 0;
 		}
 	}
+
+	showModal();
 }
 
 function numOfCols(width) {
