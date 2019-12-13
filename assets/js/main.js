@@ -10,7 +10,7 @@ window.onresize = function(event) {
 	updateContent();
 }
 
-var sort = "without"; // Initial value
+let sort = "without"; // Initial value
 var select = document.querySelector("select#sort");
 select.onchange = function(event) { // Add Event Listener
 	sort = event.target.value; // New Value
