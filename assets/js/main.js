@@ -1,5 +1,5 @@
 // Link to API
-var link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,name,location,email,phone,picture";
+const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,name,location,email,phone,picture";
 
 var width = document.documentElement.clientWidth; // Page Width
 var numColumns = numOfCols(width); // Number of Columns
@@ -84,8 +84,8 @@ function updateContent() {
 	document.querySelector("h1").innerHTML = "List of 50 Users";
 
 	// Click Event Listener
-	var userCards = document.querySelectorAll(".user");
-	for(var i = 0; i < userCards.length; i++) {
+	let userCards = document.querySelectorAll(".user");
+	for(let i = 0; i < userCards.length; i++) {
 		userCards[i].onclick = function(event) {
 			userCardClickHandler(event);
 		}
