@@ -38,28 +38,38 @@ div.row {
 	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	overflow: hidden;
+	max-height: 10.25rem
 }
 
 .user:hover {
-/*	-webkit-transition: all 0.2s ease-in-out;
-	-moz-transition: all 0.2s ease-in-out;
-	-ms-transition: all 0.2s ease-in-out;
-	-o-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;*/
-
 	cursor: pointer;
 }
 
-.user--name {
+.user--info {
+	background-color: #98B8C0;
+	transition: transform .2s ease-in-out;
+}
+
+.user--info--name {
 	margin-top: .5rem;
-	margin-bottom: 1.5rem;
+	margin-bottom: 0;
 	font-weight: 400;
+	min-height: 2.3rem;
 }
 
 .user img {
 	display: block;
 	margin: 0;
 	width: 100%;
+}
+
+.user--info--show-more {
+	margin-top: .8rem;
+	font-size: .8rem;
+}
+
+.move-up {
+	transform: translateY(-2rem);
 }
 
 
