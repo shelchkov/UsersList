@@ -4,6 +4,25 @@ const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,nam
 var width = document.documentElement.clientWidth; // Page Width
 var numColumns = numOfCols(width); // Number of Columns
 
+const icons = {
+	location: { 
+		url: "assets/icons/location.svg", 
+		fallback : "assets/icons/marker.png"
+	},
+	email: { 
+		url: "assets/icons/email.svg", 
+		fallback : "assets/icons/email.png"
+	},
+	phone: { 
+		url: "assets/icons/phone.svg", 
+		fallback : "assets/icons/phone.png"
+	},
+	person: { 
+		url: "assets/icons/person.svg", 
+		fallback : "assets/icons/person.png"
+	}
+};
+
 window.onresize = function(event) {
 	width = event.target.innerWidth;
 	numColumns = numOfCols(width);
@@ -37,6 +56,10 @@ const showModal = () => {
 	wrapper.style.zIndex = "1";
 	wrapper.style.opacity = 1;
 }
+
+const getUserName = (user) => `${user.name.title} ${user.name.first} ${user.name.last}`;
+
+const getUserLastName = (user) => `${user.name.title} ${user.name.last}`;
 
 var usersList = [];
 ajax_get(link, function(data) { // Load Users List
@@ -72,10 +95,9 @@ function updateContent() {
 		}
 		let user_html = 
 			`<article class="user user--${i}" title="Show More Info">`;
-		user_html += ('<img src="' + user["picture"]["large"] + 
-			'" alt="' + `${user.name.title} ${user.name.last}` + '">');
-		user_html += ('<p class="name">' + user["name"]["title"] + " " + 
-			user["name"]["first"] + " " + user["name"]["last"] + '</p>');
+		user_html += `<img src=${user.picture.large} 
+			alt=${getUserLastName(user)}>`;
+		user_html += `<p class="name">${getUserName(user)}</p>`;
 		user_html += '</article>';
 		html += user_html;
 	});
@@ -137,18 +159,22 @@ function showInfo(user) {
 	infoBlock.style.opacity = 1;
 	let userInfo = "";
 	userInfo += '<p id="closeWindow" title="Close">X</p>';
-	userInfo += '<img src="' + user["picture"]["large"] + '" alt="' + user.name.title + ' ' + user.name.last + '">';
-	var location = user["location"]["street"] + ', ' + user["location"]["city"] + ", " + user["location"]["state"];
-	userInfo += '<p><img class="icon" src="assets/icons/marker.png">' + location + '</p>';
-	userInfo += '<p><img class="icon" src="assets/icons/email.png">' + user["email"] + '</p>';
-	userInfo += '<p><img class="icon" src="assets/icons/phone.png">' + user["phone"] + '</p>';
-	var userName = user["name"]["title"] + " " + user["name"]["first"] + " " + user["name"]["last"];
-	userInfo += '<p><img class="icon" src="assets/icons/person.png">' + userName + '</p>';
+	userInfo += `<img src=${user.picture.large} alt=${getUserLastName(user)}>`;
+	var location = `${user.location.street}, ${user.location.city}, ${user.location.state}`;
+	userInfo += `<p><img class="icon" src=${icons.location.url} 
+		onerror="this.src='${icons.location.fallback}'">${location}</p>`;
+	userInfo += `<p><img class="icon" src=${icons.email.url}
+		onerror="this.src='${icons.email.fallback}'">${user.email}</p>`;
+	userInfo += `<p><img class="icon" src=${icons.phone.url}
+		onerror="this.src='${icons.phone.fallback}'">${user.phone}</p>`;
+	userInfo += `<p><img class="icon" src=${icons.person.url} 
+		onerror="this.src='${icons.person.fallback}'">${getUserName(user)}</p>`;
 	infoBlock.innerHTML = userInfo;
 
 	const closeObjects = document.querySelectorAll("#closeWindow");
 	for (closeObj of closeObjects) {
 		closeObj.onclick = function() {
+			// TODO: Move to different function
 			infoBlock.setAttribute("visibility", "hidden");
 			const wrapper = document.querySelector(".wrapper")
 			wrapper.setAttribute("visibility", "hidden");
