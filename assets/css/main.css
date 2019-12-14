@@ -93,7 +93,7 @@ div.main {
 
 
 /* Modal Window */
-div.wrapper {
+.modal {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -103,7 +103,7 @@ div.wrapper {
 	opacity: 0;
 }
 
-div.info {
+.modal--info {
 	position: fixed;
 	left: 50%;
 	top: 50%;
@@ -112,28 +112,27 @@ div.info {
 	-webkit-transform: translate(-50%, -50%); /* for Safari */
 	background: #F1ECE0;
 	text-align: center;
-	width: 300px;
+	width: 18.75rem;
 	vertical-align: middle;
-	height: 400px;
-	opacity: 0;
+	height: 22.5rem;
 	font-size: .9rem;
-	border-radius: 10px;
+	border-radius: .625rem;
 	overflow: hidden;
 }
 
-div.info p#closeWindow {
+.modal--closeButton {
 	background: #580A15;
 	color: #F1ECE0;
 	margin-left: auto;
 	margin-top: 0;
-	margin-bottom: 5px;
+	margin-bottom: -.125rem;
 	width: 10%;
 	font-size: 1.2rem;
 	padding: .3rem .5rem;
-	border-radius: 0 0 0 2px;
+	border-radius: 0 0 0 .125rem;
 }
 
-div.info p#closeWindow:hover {
+.modal--closeButton:hover {
 	cursor: pointer;
 }
 
@@ -151,6 +150,7 @@ div.info p#closeWindow:hover {
 	width: 1.25rem;
 	filter: invert(36%);
 }
+
 
 .loading-screen {
 	position: absolute;

@@ -4,25 +4,6 @@ const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,nam
 var width = document.documentElement.clientWidth; // Page Width
 var numColumns = numOfCols(width); // Number of Columns
 
-const icons = {
-	location: { 
-		url: "assets/icons/location.svg", 
-		fallback : "assets/icons/marker.png"
-	},
-	email: { 
-		url: "assets/icons/email.svg", 
-		fallback : "assets/icons/email.png"
-	},
-	phone: { 
-		url: "assets/icons/phone.svg", 
-		fallback : "assets/icons/phone.png"
-	},
-	person: { 
-		url: "assets/icons/person.svg", 
-		fallback : "assets/icons/person.png"
-	}
-};
-
 window.onresize = function(event) {
 	width = event.target.innerWidth;
 	numColumns = numOfCols(width);
@@ -49,22 +30,49 @@ select.onchange = function(event) { // Add Event Listener
 	}
 };
 
+// Modal Window
+const modal = document.querySelector(".modal");
+
+const icons = {
+	location: { 
+		url: "assets/icons/location.svg", 
+		fallback : "assets/icons/marker.png"
+	},
+	email: { 
+		url: "assets/icons/email.svg", 
+		fallback : "assets/icons/email.png"
+	},
+	phone: { 
+		url: "assets/icons/phone.svg", 
+		fallback : "assets/icons/phone.png"
+	},
+	person: { 
+		url: "assets/icons/person.svg", 
+		fallback : "assets/icons/person.png"
+	}
+};
+
 const showModal = () => {
-	const wrapper = document.querySelector(".wrapper");
-	wrapper.style.visibility = "visible";
-	document.querySelector(".info").style.visibility = "visible";
-	wrapper.style.zIndex = "1";
-	wrapper.style.opacity = 1;
+	modal.style.zIndex = 1;
+	modal.style.opacity = 1;
+}
+
+const hideModal = () => {
+	modal.style.zIndex = -1;
+	modal.style.opacity = 0;
 }
 
 const getUserName = (user) => `${user.name.title} ${user.name.first} ${user.name.last}`;
 
 const getUserLastName = (user) => `${user.name.title} ${user.name.last}`;
 
+
+// Hide loading screen after user's list was loaded
 const hideLoadingScreen = () => {
 	document.querySelector(".loading-screen").style.visibility = "hidden";
 }
 
+// User's List
 var usersList = [];
 ajax_get(link, function(data) { // Load Users List
 	for(var i = 0; i < data["results"].length; i++) {
@@ -72,7 +80,6 @@ ajax_get(link, function(data) { // Load Users List
 	}
 	updateContent();
 });
-
 
 function ajax_get(url, callback) {
 	var xmlhttp = new XMLHttpRequest();
@@ -91,6 +98,7 @@ function ajax_get(url, callback) {
 	xmlhttp.send();
 }
 
+
 function updateContent() {
 	let html = '<div class="row">';
 	usersList.forEach(function(user, i) {
@@ -101,7 +109,7 @@ function updateContent() {
 			`<article class="user user--${i}" title="Show More Info">`;
 		user_html += `<img src=${user.picture.large} 
 			alt=${getUserLastName(user)}>`;
-		user_html += `<h4 class="name">${getUserName(user)}</h4>`;
+		user_html += `<h4 class="user--name">${getUserName(user)}</h4>`;
 		user_html += '</article>';
 		html += user_html;
 	});
@@ -161,12 +169,13 @@ function userCardClickHandler(event) {
 }
 
 function showInfo(user) {
-	let infoBlock = document.querySelector("div.info");
-	infoBlock.style.opacity = 1;
 	let userInfo = "";
-	userInfo += '<p id="closeWindow" title="Close">X</p>';
+	const infoBlock = document.querySelector(".modal--info");
+	userInfo += `<p class="modal--closeModal modal--closeButton" 
+		title="Close">X</p>`;
 	userInfo += `<img src=${user.picture.large} alt=${getUserLastName(user)}>`;
-	var location = `${user.location.street}, ${user.location.city}, ${user.location.state}`;
+	const location = `${user.location.street}, ${user.location.city}, 
+		${user.location.state}`;
 	userInfo += `<p><img class="icon" src=${icons.location.url} 
 		onerror="this.src='${icons.location.fallback}'">${location}</p>`;
 	userInfo += `<p><img class="icon" src=${icons.email.url}
@@ -174,19 +183,13 @@ function showInfo(user) {
 	userInfo += `<p><img class="icon" src=${icons.phone.url}
 		onerror="this.src='${icons.phone.fallback}'">${user.phone}</p>`;
 	userInfo += `<p><img class="icon" src=${icons.person.url} 
-		onerror="this.src='${icons.person.fallback}'">${getUserName(user)}</p>`;
+		onerror="this.src='${icons.person.fallback}'">${getUserName(user)}
+		</p>`;
 	infoBlock.innerHTML = userInfo;
 
-	const closeObjects = document.querySelectorAll("#closeWindow");
+	const closeObjects = document.querySelectorAll(".modal--closeModal");
 	for (closeObj of closeObjects) {
-		closeObj.onclick = function() {
-			infoBlock.style.visibility = "hidden";
-			const wrapper = document.querySelector(".wrapper")
-			wrapper.style.visibility = "hidden";
-			wrapper.style.zIndex = "-1";
-			infoBlock.style.opacity = 0;
-			wrapper.style.opacity = 0;
-		}
+		closeObj.onclick = hideModal;
 	}
 
 	showModal();
