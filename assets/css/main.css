@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
 body {
 	background: #F1ECE0;
@@ -61,26 +61,29 @@ div.row {
 	width: 100%;
 }
 
-div.sort {
+
+.sort {
 	display: flex;
 	visibility: hidden;
 }
 
-div.sort label {
+.sort--label {
 	margin-left: auto;
 	margin-top: 1.2rem;
 }
 
-select#sort {
+.sort--select {
 	margin: .75rem 2rem .75rem .8rem;
 	padding: .5rem;
-	background: #F1ECE0;
+	background: transparent;
 	color: #0C030B;
+	font-family: inherit;
 }
 
-select#sort:focus {
+.sort--select:focus {
 	outline: none;
 }
+
 
 div.main {
 	z-index: 1;
