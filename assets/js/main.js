@@ -78,8 +78,8 @@ function updateContent() {
 			`<article class="user user--${i}" title="Show More Info">`;
 		user_html += ('<img src="' + user["picture"]["large"] + 
 			'" alt="' + `${user.name.title} ${user.name.last}` + '">');
-		user_html += ('<p class="name">' + user["name"]["title"] + " " + 
-			user["name"]["first"] + " " + user["name"]["last"] + '</p>');
+		user_html += `<h4 class="user--name"> ${user["name"]["title"]} 
+			${user["name"]["first"]} ${user["name"]["last"]}</h4>`;
 		user_html += '</article>';
 		html += user_html;
 	});
