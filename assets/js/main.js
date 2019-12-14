@@ -99,6 +99,21 @@ function ajax_get(url, callback) {
 }
 
 
+// User Card
+userCardShowMore = (userNumber) => {
+	const selected = document.querySelector(`.user--${userNumber} > .user--info`);
+	console.log(selected);
+
+	selected.classList.add("move-up");
+}
+
+userCardHideMore = (userNumber) => {
+	// TODO: Move to a function
+	const selected = document.querySelector(`.user--${userNumber} > .user--info`);	
+	selected.classList.remove("move-up");
+}
+
+
 function updateContent() {
 	let html = '<div class="row">';
 	usersList.forEach(function(user, i) {
@@ -109,7 +124,9 @@ function updateContent() {
 			`<article class="user user--${i}" title="Show More Info">`;
 		user_html += `<img src=${user.picture.large} 
 			alt=${getUserLastName(user)}>`;
-		user_html += `<h4 class="user--name">${getUserName(user)}</h4>`;
+		user_html += `<div class="user--info">
+			<h4 class="user--info--name">${getUserName(user)}</h4>
+			<p class="user--info--show-more">Click To See More</p></div>`;
 		user_html += '</article>';
 		html += user_html;
 	});
@@ -122,6 +139,14 @@ function updateContent() {
 	for(let i = 0; i < userCards.length; i++) {
 		userCards[i].onclick = function(event) {
 			userCardClickHandler(event);
+		}
+
+		userCards[i].onmouseover = function(event) {
+			userCardShowMore(i);
+		}
+
+		userCards[i].onmouseout = function(event) {
+			userCardHideMore(i);
 		}
 	}
 
@@ -139,7 +164,7 @@ function updateContent() {
 	hideLoadingScreen();
 }
 
-function userCardClickHandler(event) {
+function getUserNumber(event) {
 	let userNumber = undefined;
 	for (element of event.path) {
 		const classList = element.classList;
@@ -159,6 +184,11 @@ function userCardClickHandler(event) {
 		userNumber = parseInt(foundClass.split("--")[1]);
 		break;
 	}
+	return userNumber;
+}
+
+function userCardClickHandler(event) {
+	const userNumber = getUserNumber(event);
 
 	if(userNumber === undefined) {
 		throw("Something went wrong while trying to select user");
