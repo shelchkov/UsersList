@@ -145,9 +145,11 @@ div.info p#closeWindow:hover {
 	height: 100%;
 }
 
-img.icon {
+.icon {
 	vertical-align: middle;
 	margin-right: .3rem;
+	width: 1.25rem;
+	filter: invert(36%);
 }
 
 .loading-screen {
