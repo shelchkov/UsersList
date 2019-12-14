@@ -145,3 +145,17 @@ img.icon {
 	vertical-align: middle;
 	margin-right: .3rem;
 }
+
+.loading-screen {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.loading-screen--message {
+	line-height: 100vh;
+	text-align: center;
+	font-size: 2rem;
+}

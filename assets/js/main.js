@@ -32,10 +32,14 @@ select.onchange = function(event) { // Add Event Listener
 
 const showModal = () => {
 	const wrapper = document.querySelector(".wrapper");
-	wrapper.setAttribute("visibility", "visible");
-	document.querySelector(".info").setAttribute("visibility", "visible");
+	wrapper.style.visibility = "visible";
+	document.querySelector(".info").style.visibility = "visible";
 	wrapper.style.zIndex = "1";
 	wrapper.style.opacity = 1;
+}
+
+const hideLoadingScreen = () => {
+	document.querySelector(".loading-screen").style.visibility = "hidden";
 }
 
 var usersList = [];
@@ -101,6 +105,8 @@ function updateContent() {
 
 	// Make div.sort visible
 	document.querySelector("div.sort").style.visibility = "visible";
+
+	hideLoadingScreen();
 }
 
 function userCardClickHandler(event) {
@@ -149,9 +155,9 @@ function showInfo(user) {
 	const closeObjects = document.querySelectorAll("#closeWindow");
 	for (closeObj of closeObjects) {
 		closeObj.onclick = function() {
-			infoBlock.setAttribute("visibility", "hidden");
+			infoBlock.style.visibility = "hidden";
 			const wrapper = document.querySelector(".wrapper")
-			wrapper.setAttribute("visibility", "hidden");
+			wrapper.style.visibility = "hidden";
 			wrapper.style.zIndex = "-1";
 			infoBlock.style.opacity = 0;
 			wrapper.style.opacity = 0;
