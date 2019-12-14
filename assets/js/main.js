@@ -53,12 +53,12 @@ const icons = {
 };
 
 const showModal = () => {
-	modal.style.zIndex = "1";
+	modal.style.zIndex = 1;
 	modal.style.opacity = 1;
 }
 
 const hideModal = () => {
-	modal.style.zIndex = "-1";
+	modal.style.zIndex = -1;
 	modal.style.opacity = 0;
 }
 
@@ -189,7 +189,7 @@ function showInfo(user) {
 
 	const closeObjects = document.querySelectorAll(".modal--closeModal");
 	for (closeObj of closeObjects) {
-		closeObj.onclick = () => hideModal();
+		closeObj.onclick = hideModal;
 	}
 
 	showModal();
