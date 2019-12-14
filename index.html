@@ -7,13 +7,17 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
 </head>
 <body>
+	<div class="loading-screen">
+		<p class="loading-screen--message">Loading...</p>
+	</div>
+	
 	<main class="container">
 		<div class="main">
-			<h1>Loading...</h1>
+			<h1></h1>
 
 			<div class="sort">
-				<label for="sort">Sort</label>
-				<select id="sort" name="sort">
+				<label for="sort" class="sort--label">Sort</label>
+				<select id="sort" name="sort" class="sort--select">
 					<option value="without">Without</option>
 					<option value="alphabetically">Alphabatically</option>
 					<option value="reverse">Reverse</option>
@@ -25,9 +29,7 @@
 	</main>
 	<div class="wrapper">
 		<div id="closeWindow" class="modal--backdrop"></div>
-		<div class="info">
-			
-		</div>
+		<div class="info"></div>
 	</div>
 	<script type="text/javascript" src="assets/js/main.js"></script>
 </body>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
 body {
 	background: #F1ECE0;
@@ -50,9 +50,10 @@ div.row {
 	cursor: pointer;
 }
 
-.user p {
-	margin-top: 8px;
-	margin-bottom: 24px;
+.user--name {
+	margin-top: .5rem;
+	margin-bottom: 1.5rem;
+	font-weight: 400;
 }
 
 .user img {
@@ -61,26 +62,29 @@ div.row {
 	width: 100%;
 }
 
-div.sort {
+
+.sort {
 	display: flex;
 	visibility: hidden;
 }
 
-div.sort label {
+.sort--label {
 	margin-left: auto;
 	margin-top: 1.2rem;
 }
 
-select#sort {
+.sort--select {
 	margin: .75rem 2rem .75rem .8rem;
 	padding: .5rem;
-	background: #F1ECE0;
+	background: transparent;
 	color: #0C030B;
+	font-family: inherit;
 }
 
-select#sort:focus {
+.sort--select:focus {
 	outline: none;
 }
+
 
 div.main {
 	z-index: 1;
@@ -146,4 +150,18 @@ div.info p#closeWindow:hover {
 	margin-right: .3rem;
 	width: 1.25rem;
 	filter: invert(36%);
+}
+
+.loading-screen {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.loading-screen--message {
+	line-height: 100vh;
+	text-align: center;
+	font-size: 2rem;
 }

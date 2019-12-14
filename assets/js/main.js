@@ -51,8 +51,8 @@ select.onchange = function(event) { // Add Event Listener
 
 const showModal = () => {
 	const wrapper = document.querySelector(".wrapper");
-	wrapper.setAttribute("visibility", "visible");
-	document.querySelector(".info").setAttribute("visibility", "visible");
+	wrapper.style.visibility = "visible";
+	document.querySelector(".info").style.visibility = "visible";
 	wrapper.style.zIndex = "1";
 	wrapper.style.opacity = 1;
 }
@@ -60,6 +60,10 @@ const showModal = () => {
 const getUserName = (user) => `${user.name.title} ${user.name.first} ${user.name.last}`;
 
 const getUserLastName = (user) => `${user.name.title} ${user.name.last}`;
+
+const hideLoadingScreen = () => {
+	document.querySelector(".loading-screen").style.visibility = "hidden";
+}
 
 var usersList = [];
 ajax_get(link, function(data) { // Load Users List
@@ -97,7 +101,7 @@ function updateContent() {
 			`<article class="user user--${i}" title="Show More Info">`;
 		user_html += `<img src=${user.picture.large} 
 			alt=${getUserLastName(user)}>`;
-		user_html += `<p class="name">${getUserName(user)}</p>`;
+		user_html += `<h4 class="name">${getUserName(user)}</h4>`;
 		user_html += '</article>';
 		html += user_html;
 	});
@@ -123,6 +127,8 @@ function updateContent() {
 
 	// Make div.sort visible
 	document.querySelector("div.sort").style.visibility = "visible";
+
+	hideLoadingScreen();
 }
 
 function userCardClickHandler(event) {
@@ -174,10 +180,9 @@ function showInfo(user) {
 	const closeObjects = document.querySelectorAll("#closeWindow");
 	for (closeObj of closeObjects) {
 		closeObj.onclick = function() {
-			// TODO: Move to different function
-			infoBlock.setAttribute("visibility", "hidden");
+			infoBlock.style.visibility = "hidden";
 			const wrapper = document.querySelector(".wrapper")
-			wrapper.setAttribute("visibility", "hidden");
+			wrapper.style.visibility = "hidden";
 			wrapper.style.zIndex = "-1";
 			infoBlock.style.opacity = 0;
 			wrapper.style.opacity = 0;
