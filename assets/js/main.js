@@ -53,8 +53,18 @@ const showModal = () => {
 	const wrapper = document.querySelector(".wrapper");
 	wrapper.style.visibility = "visible";
 	document.querySelector(".info").style.visibility = "visible";
+	document.querySelector(".info").style.opacity = 1;
 	wrapper.style.zIndex = "1";
 	wrapper.style.opacity = 1;
+}
+
+const hideModal = (infoBlock) => {
+	infoBlock.style.visibility = "hidden";
+	const wrapper = document.querySelector(".wrapper")
+	wrapper.style.visibility = "hidden";
+	wrapper.style.zIndex = "-1";
+	infoBlock.style.opacity = 0;
+	wrapper.style.opacity = 0;
 }
 
 const getUserName = (user) => `${user.name.title} ${user.name.first} ${user.name.last}`;
@@ -101,7 +111,7 @@ function updateContent() {
 			`<article class="user user--${i}" title="Show More Info">`;
 		user_html += `<img src=${user.picture.large} 
 			alt=${getUserLastName(user)}>`;
-		user_html += `<h4 class="name">${getUserName(user)}</h4>`;
+		user_html += `<h4 class="user--name">${getUserName(user)}</h4>`;
 		user_html += '</article>';
 		html += user_html;
 	});
@@ -161,9 +171,8 @@ function userCardClickHandler(event) {
 }
 
 function showInfo(user) {
-	let infoBlock = document.querySelector("div.info");
-	infoBlock.style.opacity = 1;
 	let userInfo = "";
+	const infoBlock = document.querySelector("div.info");
 	userInfo += '<p id="closeWindow" title="Close">X</p>';
 	userInfo += `<img src=${user.picture.large} alt=${getUserLastName(user)}>`;
 	var location = `${user.location.street}, ${user.location.city}, ${user.location.state}`;
@@ -179,14 +188,7 @@ function showInfo(user) {
 
 	const closeObjects = document.querySelectorAll("#closeWindow");
 	for (closeObj of closeObjects) {
-		closeObj.onclick = function() {
-			infoBlock.style.visibility = "hidden";
-			const wrapper = document.querySelector(".wrapper")
-			wrapper.style.visibility = "hidden";
-			wrapper.style.zIndex = "-1";
-			infoBlock.style.opacity = 0;
-			wrapper.style.opacity = 0;
-		}
+		closeObj.onclick = () => hideModal(infoBlock);
 	}
 
 	showModal();
