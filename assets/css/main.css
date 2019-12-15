@@ -97,13 +97,16 @@ div.row {
 .sort--select {
 	margin: .75rem 2rem .75rem .8rem;
 	padding: .5rem;
-	background: transparent;
+	background: #F1ECE0;
 	color: #0C030B;
 	font-family: inherit;
 }
 
 .sort--select:focus {
 	outline: none;
+	-webkit-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
+	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
+	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 }
 
 
