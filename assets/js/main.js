@@ -116,11 +116,8 @@ userCardHideMore = (userNumber) => {
 
 
 function updateContent() {
-	let html = '<div class="row">';
+	let html = '';
 	usersList.forEach(function(user, i) {
-		if(i % numColumns == 0 && i != 0) {
-			html += '</div><div class="row">';
-		}
 		let user_html = 
 			`<article class="user user--${i}" title="Show More Info">`;
 		user_html += `<div class="user--placeholder"><img class="user--image"
@@ -131,8 +128,7 @@ function updateContent() {
 		user_html += '</article>';
 		html += user_html;
 	});
-	html += "</div>";
-	document.querySelector("div.users").innerHTML = html;
+	document.querySelector(".users").innerHTML = html;
 	document.querySelector("h1").innerHTML = "List of 50 Users";
 
 	// Click Event Listener
