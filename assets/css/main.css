@@ -57,9 +57,11 @@ div.row {
 	min-height: 2.3rem;
 }
 
-.user img {
-	display: block;
-	margin: 0;
+.user--placeholder {
+	min-height: 8rem;
+}
+
+.user--image {
 	width: 100%;
 }
 
