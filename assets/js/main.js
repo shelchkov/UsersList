@@ -2,11 +2,12 @@
 const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,name,location,email,phone,picture";
 
 let width = document.documentElement.clientWidth; // Page Width
-let numColumns = numOfCols(width); // Number of Columns
+let numColumns = 50; // numOfCols(width); // Number of Columns
 
 window.onresize = function(event) {
+	console.log(event);
 	width = event.target.innerWidth;
-	numColumns = numOfCols(width);
+	numColumns = 50; // numOfCols(width);
 	updateContent();
 }
 
@@ -137,65 +138,23 @@ function updateContent() {
 	// Click Event Listener
 	let userCards = document.querySelectorAll(".user");
 	for(let i = 0; i < userCards.length; i++) {
-		userCards[i].onclick = function(event) {
-			userCardClickHandler(event);
+		userCards[i].onclick = function() {
+			showInfo(usersList[i]);
 		}
 
-		userCards[i].onmouseover = function(event) {
+		userCards[i].onmouseover = function() {
 			userCardShowMore(i);
 		}
 
-		userCards[i].onmouseout = function(event) {
+		userCards[i].onmouseout = function() {
 			userCardHideMore(i);
 		}
-	}
-
-	// Change max-width for .user
-	var divUsers = document.querySelectorAll(".user");
-	var newMaxWidth = divUsers[0].offsetWidth;
-
-	for(var i = 0; i < divUsers.length; i++) {
-		divUsers[i].style.maxWidth = (newMaxWidth - 10) + "px";
 	}
 
 	// Make div.sort visible
 	document.querySelector("div.sort").style.visibility = "visible";
 
 	hideLoadingScreen();
-}
-
-function getUserNumber(event) {
-	let userNumber = undefined;
-	for (element of event.path) {
-		const classList = element.classList;
-		if (!classList.length) continue;
-
-		let foundClass = undefined;
-
-		for (elementClass of classList) {
-			if (elementClass.includes("user--")) {
-				foundClass = elementClass;
-				break;
-			}
-		}
-
-		if (!foundClass) continue;
-
-		userNumber = parseInt(foundClass.split("--")[1]);
-		break;
-	}
-	return userNumber;
-}
-
-function userCardClickHandler(event) {
-	const userNumber = getUserNumber(event);
-
-	if(userNumber === undefined) {
-		throw("Something went wrong while trying to select user");
-		return;
-	}
-
-	showInfo(usersList[userNumber]);
 }
 
 function showInfo(user) {
