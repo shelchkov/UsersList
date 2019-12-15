@@ -90,7 +90,7 @@ div.users {
 .sort--select {
 	margin: .75rem 2rem .75rem .8rem;
 	padding: .5rem;
-	background: transparent;
+	background: #F1ECE0;
 	color: #0C030B;
 	font-family: inherit;
 	border-radius: .3rem;
@@ -124,6 +124,7 @@ div.main {
 	height: 100%;
 	background-color: rgba(13, 13, 13, .2);
 	opacity: 0;
+	z-index: -1;
 }
 
 .modal--info {
