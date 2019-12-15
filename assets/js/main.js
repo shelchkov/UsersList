@@ -124,7 +124,7 @@ function updateContent() {
 		let user_html = 
 			`<article class="user user--${i}" title="Show More Info">`;
 		user_html += `<div class="user--placeholder"><img class="user--image"
-			src=${user.picture.large} alt=${getUserLastName(user)}></div>`;
+			src=${user.picture.large} alt="${getUserLastName(user)}"></div>`;
 		user_html += `<div class="user--info">
 			<h4 class="user--info--name">${getUserName(user)}</h4>
 			<p class="user--info--show-more">Click To See More</p></div>`;
@@ -162,7 +162,7 @@ function showInfo(user) {
 	const infoBlock = document.querySelector(".modal--info");
 	userInfo += `<p class="modal--closeModal modal--closeButton" 
 		title="Close">X</p>`;
-	userInfo += `<img src=${user.picture.large} alt=${getUserLastName(user)}>`;
+	userInfo += `<img src=${user.picture.large} alt="${getUserLastName(user)}">`;
 	const location = `${user.location.street}, ${user.location.city}, 
 		${user.location.state}`;
 	userInfo += `<p><img class="icon" src=${icons.location.url} 
