@@ -10,6 +10,12 @@ body {
 	margin: 7% 10%;
 }
 
+@media screen and (max-width: 31rem) {
+	.container {
+		margin: 5% 0;
+	}
+}
+
 h1 {
 	text-align: center;
 	margin-bottom: .7rem;
