@@ -123,8 +123,8 @@ function updateContent() {
 		}
 		let user_html = 
 			`<article class="user user--${i}" title="Show More Info">`;
-		user_html += `<img src=${user.picture.large} 
-			alt=${getUserLastName(user)}>`;
+		user_html += `<div class="user--placeholder"><img class="user--image"
+			src=${user.picture.large} alt=${getUserLastName(user)}></div>`;
 		user_html += `<div class="user--info">
 			<h4 class="user--info--name">${getUserName(user)}</h4>
 			<p class="user--info--show-more">Click To See More</p></div>`;
