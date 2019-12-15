@@ -137,15 +137,15 @@ function updateContent() {
 	// Click Event Listener
 	let userCards = document.querySelectorAll(".user");
 	for(let i = 0; i < userCards.length; i++) {
-		userCards[i].onclick = function(event) {
-			userCardClickHandler(event);
+		userCards[i].onclick = function() {
+			showInfo(usersList[i]);
 		}
 
-		userCards[i].onmouseover = function(event) {
+		userCards[i].onmouseover = function() {
 			userCardShowMore(i);
 		}
 
-		userCards[i].onmouseout = function(event) {
+		userCards[i].onmouseout = function() {
 			userCardHideMore(i);
 		}
 	}
@@ -162,40 +162,6 @@ function updateContent() {
 	document.querySelector("div.sort").style.visibility = "visible";
 
 	hideLoadingScreen();
-}
-
-function getUserNumber(event) {
-	let userNumber = undefined;
-	for (element of event.path) {
-		const classList = element.classList;
-		if (!classList.length) continue;
-
-		let foundClass = undefined;
-
-		for (elementClass of classList) {
-			if (elementClass.includes("user--")) {
-				foundClass = elementClass;
-				break;
-			}
-		}
-
-		if (!foundClass) continue;
-
-		userNumber = parseInt(foundClass.split("--")[1]);
-		break;
-	}
-	return userNumber;
-}
-
-function userCardClickHandler(event) {
-	const userNumber = getUserNumber(event);
-
-	if(userNumber === undefined) {
-		throw("Something went wrong while trying to select user");
-		return;
-	}
-
-	showInfo(usersList[userNumber]);
 }
 
 function showInfo(user) {
