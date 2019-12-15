@@ -2,11 +2,12 @@
 const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,name,location,email,phone,picture";
 
 var width = document.documentElement.clientWidth; // Page Width
-var numColumns = numOfCols(width); // Number of Columns
+var numColumns = 50; // numOfCols(width); // Number of Columns
 
 window.onresize = function(event) {
+	console.log(event);
 	width = event.target.innerWidth;
-	numColumns = numOfCols(width);
+	numColumns = 50; // numOfCols(width);
 	updateContent();
 }
 
@@ -148,14 +149,6 @@ function updateContent() {
 		userCards[i].onmouseout = function() {
 			userCardHideMore(i);
 		}
-	}
-
-	// Change max-width for .user
-	var divUsers = document.querySelectorAll(".user");
-	var newMaxWidth = divUsers[0].offsetWidth;
-
-	for(var i = 0; i < divUsers.length; i++) {
-		divUsers[i].style.maxWidth = (newMaxWidth - 10) + "px";
 	}
 
 	// Make div.sort visible
