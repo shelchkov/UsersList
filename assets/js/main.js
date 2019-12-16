@@ -1,6 +1,9 @@
 // Link to API
 const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,name,location,email,phone,picture";
 
+// User's List
+var usersList = [];
+
 let width = document.documentElement.clientWidth; // Page Width
 let numColumns = 50; // numOfCols(width); // Number of Columns
 
@@ -11,24 +14,23 @@ window.onresize = function(event) {
 	updateContent();
 }
 
-let sort = "without"; // Initial value
+
 const select = document.querySelector(".sort--select");
 select.onchange = function(event) { // Add Event Listener
-	sort = event.target.value; // New Value
+	const sort = event.target.value; // New Value
 
-	if(sort === "alphabetically" || sort === "reverse") {
-		usersList.sort(function(a, b){
-			if(a["name"]["last"] + a["name"]["first"] < b["name"]["last"] + b["name"]["first"])
-				return -1;
-			else if(a["name"]["last"] + a["name"]["first"] > b["name"]["last"] + b["name"]["first"]) 
-				return 1;
-			return 0;
-		});
-		if (sort == "reverse") {
-			usersList.reverse();
-		}
-		updateContent();
-	}
+	if (sort === "without") return;
+
+	const sortDirection = sort === "alphabetically" ? 1 : -1
+
+	const getUserName = (user) => user.name.last + user.name.first;
+
+	usersList.sort(function(a, b){
+		return getUserName(a) < getUserName(b) ? -sortDirection : 
+		sortDirection;
+	});
+
+	updateContent();
 };
 
 // Modal Window
@@ -78,8 +80,7 @@ const getUserLastName = (user) => `${user.name.title} ${user.name.last}`;
 const hideLoadingScreen = () => 
 	document.querySelector(".loading-screen").style.visibility = "hidden";
 
-// User's List
-var usersList = [];
+
 ajax_get(link, function(data) { // Load Users List
 	for(var i = 0; i < data["results"].length; i++) {
 		usersList[usersList.length] = data["results"][i];
