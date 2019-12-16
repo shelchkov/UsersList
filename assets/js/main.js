@@ -1,9 +1,6 @@
 // Link to API
 const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,name,location,email,phone,picture";
 
-let width = document.documentElement.clientWidth; // Page Width
-let numColumns = 50;
-
 let sort = "without"; // Initial value
 const select = document.querySelector(".sort--select");
 select.onchange = function(event) { // Add Event Listener
@@ -71,6 +68,7 @@ const getUserLastName = (user) => `${user.name.title} ${user.name.last}`;
 const hideLoadingScreen = () => 
 	document.querySelector(".loading-screen").style.visibility = "hidden";
 
+
 // User's List
 var usersList = [];
 ajax_get(link, function(data) { // Load Users List
@@ -127,7 +125,7 @@ function updateContent() {
 	document.querySelector(".users").innerHTML = html;
 	document.querySelector("h1").innerHTML = "List of 50 Users";
 
-	// Click Event Listener
+	// Click Event Listeners
 	let userCards = document.querySelectorAll(".user");
 	for(let i = 0; i < userCards.length; i++) {
 		userCards[i].onclick = () => showInfo(usersList[i]);
