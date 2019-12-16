@@ -53,14 +53,20 @@ const icons = {
 	}
 };
 
+const body = document.querySelector("body");
+
 const showModal = () => {
 	modal.style.zIndex = 1;
 	modal.style.opacity = 1;
+	// Disable scroll
+	body.style.overflow = "hidden";
 }
 
 const hideModal = () => {
 	modal.style.zIndex = -1;
 	modal.style.opacity = 0;
+	// Enable scroll
+	body.style.overflow = "auto";
 }
 
 const getUserName = (user) => `${user.name.title} ${user.name.first} ${user.name.last}`;
