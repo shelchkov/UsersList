@@ -2,14 +2,7 @@
 const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,name,location,email,phone,picture";
 
 let width = document.documentElement.clientWidth; // Page Width
-let numColumns = 50; // numOfCols(width); // Number of Columns
-
-window.onresize = function(event) {
-	console.log(event);
-	width = event.target.innerWidth;
-	numColumns = 50; // numOfCols(width);
-	updateContent();
-}
+let numColumns = 50;
 
 let sort = "without"; // Initial value
 const select = document.querySelector(".sort--select");
@@ -175,21 +168,4 @@ function showInfo(user) {
 	}
 
 	showModal();
-}
-
-function numOfCols(width) {
-	var numCols = 1; // Number of Columns
-	if(width > 1200)
-		numCols = 8;
-	else if(width > 1000)
-		numCols = 6;
-	else if(width > 770)
-		numCols = 5;
-	else if(width > 580)
-		numCols = 4;
-	else if(width > 400)
-		numCols = 3;
-	else if(width > 240)
-		numCols = 2;
-	return numCols;
 }
