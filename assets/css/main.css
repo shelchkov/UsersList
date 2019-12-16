@@ -16,17 +16,8 @@ h1 {
 	margin: 7% 10%;
 }
 
-@media screen and (max-width: 31rem) {
-	.container {
-		margin: 5% 0;
-	}
-}
-
 .users {
 	margin-top: .3rem;
-}
-
-div.row {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -93,18 +84,32 @@ div.row {
 .sort--label {
 	margin-left: auto;
 	margin-top: 1.2rem;
+	opacity: .8;
+	font-size: 1rem;
 }
 
 .sort--select {
 	margin: .75rem 2rem .75rem .8rem;
 	padding: .5rem;
-	background: transparent;
+	background: #F1ECE0;
 	color: #0C030B;
 	font-family: inherit;
+	border-radius: .3rem;
+	font-size: .8rem;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	opacity: .8;
+	background-image: url("../../assets/icons/arrow.svg");
+	width: 121px;
+	height: 35px;
 }
 
 .sort--select:focus {
 	outline: none;
+	-webkit-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
+	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
+	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 }
 
 
@@ -123,6 +128,7 @@ div.main {
 	height: 100%;
 	background-color: rgba(13, 13, 13, .2);
 	opacity: 0;
+	z-index: -1;
 }
 
 .modal--info {
@@ -186,4 +192,15 @@ div.main {
 	line-height: 100vh;
 	text-align: center;
 	font-size: 2rem;
+}
+
+
+@media screen and (max-width: 31rem) {
+	.container {
+		margin: 5% 0;
+	}
+
+	.user {
+		margin: .65rem;
+	}
 }
