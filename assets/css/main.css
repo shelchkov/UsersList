@@ -39,7 +39,7 @@ h1 {
 	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	overflow: hidden;
-	max-height: 10.25rem
+	max-height: 11.45rem
 }
 
 .user:hover {
@@ -67,12 +67,12 @@ h1 {
 }
 
 .user--info--show-more {
-	margin-top: .8rem;
+	margin-top: 1rem;
 	font-size: .8rem;
 }
 
 .move-up {
-	transform: translateY(-2rem);
+	transform: translateY(-1.8rem);
 }
 
 
