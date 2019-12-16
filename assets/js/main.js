@@ -12,7 +12,7 @@ window.onresize = function(event) {
 }
 
 let sort = "without"; // Initial value
-var select = document.querySelector("select#sort");
+const select = document.querySelector(".sort--select");
 select.onchange = function(event) { // Add Event Listener
 	sort = event.target.value; // New Value
 
@@ -75,9 +75,8 @@ const getUserLastName = (user) => `${user.name.title} ${user.name.last}`;
 
 
 // Hide loading screen after user's list was loaded
-const hideLoadingScreen = () => {
+const hideLoadingScreen = () => 
 	document.querySelector(".loading-screen").style.visibility = "hidden";
-}
 
 // User's List
 var usersList = [];
@@ -108,25 +107,20 @@ function ajax_get(url, callback) {
 
 // User Card
 userCardShowMore = (userNumber) => {
-	const selected = document.querySelector(`.user--${userNumber} > .user--info`);
-	console.log(selected);
-
-	selected.classList.add("move-up");
+	const usersInfo = document.querySelector(`.user--${userNumber} > .user--info`);
+	usersInfo.classList.add("move-up");
 }
 
 userCardHideMore = (userNumber) => {
 	// TODO: Move to a function
-	const selected = document.querySelector(`.user--${userNumber} > .user--info`);	
-	selected.classList.remove("move-up");
+	const usersInfo = document.querySelector(`.user--${userNumber} > .user--info`);	
+	usersInfo.classList.remove("move-up");
 }
 
 
 function updateContent() {
-	let html = '<div class="row">';
+	let html = '';
 	usersList.forEach(function(user, i) {
-		if(i % numColumns == 0 && i != 0) {
-			html += '</div><div class="row">';
-		}
 		let user_html = 
 			`<article class="user user--${i}" title="Show More Info">`;
 		user_html += `<div class="user--placeholder"><img class="user--image"
@@ -137,24 +131,17 @@ function updateContent() {
 		user_html += '</article>';
 		html += user_html;
 	});
-	html += "</div>";
-	document.querySelector("div.users").innerHTML = html;
+	document.querySelector(".users").innerHTML = html;
 	document.querySelector("h1").innerHTML = "List of 50 Users";
 
 	// Click Event Listener
 	let userCards = document.querySelectorAll(".user");
 	for(let i = 0; i < userCards.length; i++) {
-		userCards[i].onclick = function() {
-			showInfo(usersList[i]);
-		}
+		userCards[i].onclick = () => showInfo(usersList[i]);
 
-		userCards[i].onmouseover = function() {
-			userCardShowMore(i);
-		}
+		userCards[i].onmouseover = () => userCardShowMore(i);
 
-		userCards[i].onmouseout = function() {
-			userCardHideMore(i);
-		}
+		userCards[i].onmouseout = () => userCardHideMore(i);
 	}
 
 	// Make div.sort visible
