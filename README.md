@@ -8,4 +8,4 @@ On the page there's presented a list of 50 users. The list is fetched from the s
 
 To see more information you can click on selected user. Close opened window by clicking anywhere outside the modal window.
 
-![50Users](https://raw.githubusercontent.com/shelchkov/UsersList/master/examples/modal.PNG)
+![50Users](https://raw.githubusercontent.com/shelchkov/UsersList/master/examples/modal.png)
