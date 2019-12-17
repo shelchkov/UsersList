@@ -149,7 +149,7 @@ function showInfo(user) {
 	userInfo += `<img src=${user.picture.large} alt="${getUserLastName(user)}">`;
 	const location = `${user.location.street}, ${user.location.city}, 
 		${user.location.state}`;
-	userInfo += `<p><img class="icon" src=${icons.location.url} 
+	userInfo += `<div class="modal--info--text"><p><img class="icon" src=${icons.location.url} 
 		onerror="this.src='${icons.location.fallback}'">${location}</p>`;
 	userInfo += `<p><img class="icon" src=${icons.email.url}
 		onerror="this.src='${icons.email.fallback}'">${user.email}</p>`;
@@ -157,7 +157,7 @@ function showInfo(user) {
 		onerror="this.src='${icons.phone.fallback}'">${user.phone}</p>`;
 	userInfo += `<p><img class="icon" src=${icons.person.url} 
 		onerror="this.src='${icons.person.fallback}'">${getUserName(user)}
-		</p>`;
+		</p></div>`;
 	infoBlock.innerHTML = userInfo;
 
 	const closeObjects = document.querySelectorAll(".modal--closeModal");
