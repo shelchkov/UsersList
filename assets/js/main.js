@@ -2,26 +2,35 @@
 const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,name,location,email,phone,picture";
 
 // User's List
-var usersList = [];
+let usersList = [];
 
 
+// Sort
+let sortDirection = "without";
 const select = document.querySelector(".sort--select");
-select.onchange = function(event) { // Add Event Listener
-	const sort = event.target.value; // New Value
+select.onchange = (event) => {
+	const sort = event.target.value;
 
-	if (sort === "without") return;
+	if (sort === sortDirection || sort === "without") return;
 
-	const sortDirection = sort === "alphabetically" ? 1 : -1
+	if (sortDirection !== "without") {
+		usersList = usersList.reverse();
+		sortDirection = sort;
+		updateContent();
+		return;
+	}
 
-	const getUserName = (user) => user.name.last + user.name.first;
+	sortDirection = sort;
+	const getUserName = (user) => `${user.name.last} ${user.name.first}`;
+	const sortDir = sort === "alphabetically" ? 1 : -1
 
-	usersList.sort(function(a, b){
-		return getUserName(a) < getUserName(b) ? -sortDirection : 
-		sortDirection;
-	});
+	usersList.sort((a, b) => 
+		sortDir * (getUserName(a) > getUserName(b) ? 1 : -1)
+	);
 
 	updateContent();
 };
+
 
 // Modal Window
 const modal = document.querySelector(".modal");
