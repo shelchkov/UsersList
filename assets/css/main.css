@@ -129,18 +129,22 @@ h1 {
 
 .modal--info {
 	position: fixed;
+	vertical-align: middle;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%); /* for IE 9 */
 	-webkit-transform: translate(-50%, -50%); /* for Safari */
-	background: #F1ECE0;
-	text-align: center;
+
 	width: 18.75rem;
-	vertical-align: middle;
-	height: 22.5rem;
-	font-size: .9rem;
+	height: 22.9rem;
+
+	background: #F1ECE0;
 	border-radius: .625rem;
+
+	font-size: .9rem;
+	text-align: center;
+
 	overflow: hidden;
 }
 
@@ -169,8 +173,7 @@ h1 {
 }
 
 .modal--info--text {
-	padding-left: 1.2rem;
-	padding-right: 1.2rem;
+	padding: .8rem 1.2rem;
 }
 
 .icon {
