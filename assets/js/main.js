@@ -103,7 +103,6 @@ userCardShowMore = (userNumber) => {
 }
 
 userCardHideMore = (userNumber) => {
-	// TODO: Move to a function
 	const usersInfo = document.querySelector(`.user--${userNumber} > .user--info`);	
 	usersInfo.classList.remove("move-up");
 }
@@ -129,10 +128,8 @@ function updateContent() {
 	let userCards = document.querySelectorAll(".user");
 	for(let i = 0; i < userCards.length; i++) {
 		userCards[i].onclick = () => showInfo(usersList[i]);
-
-		userCards[i].onmouseover = () => userCardShowMore(i);
-
-		userCards[i].onmouseout = () => userCardHideMore(i);
+		userCards[i].onmouseenter = () => userCardShowMore(i);
+		userCards[i].onmouseleave = () => userCardHideMore(i);
 	}
 
 	// Make div.sort visible
