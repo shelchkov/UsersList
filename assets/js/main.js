@@ -27,7 +27,6 @@ select.onchange = function(event) { // Add Event Listener
 // Modal Window
 const modal = document.querySelector(".modal");
 const body = document.querySelector("body");
-const container = document.querySelector(".container");
 
 const icons = {
 	location: { 
@@ -157,7 +156,7 @@ function showModal() {
 	modal.style.opacity = 1;
 	// Disable scroll
 	body.style.overflow = "hidden";
-	container.style.paddingRight = `${document.body.clientWidth - windowWidth}px`;
+	body.style.paddingRight = `${document.body.clientWidth - windowWidth}px`;
 }
 
 function hideModal() {
@@ -165,5 +164,5 @@ function hideModal() {
 	modal.style.opacity = 0;
 	// Enable scroll
 	body.style.overflow = "auto";
-	container.style.paddingRight = "";
+	body.style.paddingRight = "";
 }
