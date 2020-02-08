@@ -97,17 +97,6 @@ function ajax_get(url, callback) {
 
 
 // User Card
-userCardShowMore = (userNumber) => {
-	const usersInfo = document.querySelector(`.user--${userNumber} > .user--info`);
-	usersInfo.classList.add("move-up");
-}
-
-userCardHideMore = (userNumber) => {
-	const usersInfo = document.querySelector(`.user--${userNumber} > .user--info`);	
-	usersInfo.classList.remove("move-up");
-}
-
-
 function updateContent() {
 	let html = '';
 	usersList.forEach(function(user, i) {
@@ -128,8 +117,8 @@ function updateContent() {
 	let userCards = document.querySelectorAll(".user");
 	for(let i = 0; i < userCards.length; i++) {
 		userCards[i].onclick = () => showInfo(usersList[i]);
-		userCards[i].onmouseenter = () => userCardShowMore(i);
-		userCards[i].onmouseleave = () => userCardHideMore(i);
+		userCards[i].onmouseenter = () => userCardInfoToggle(userCards[i]);
+		userCards[i].onmouseleave = () => userCardInfoToggle(userCards[i]);
 	}
 
 	// Make div.sort visible
@@ -163,4 +152,11 @@ function showInfo(user) {
 	}
 
 	showModal();
+}
+
+function userCardInfoToggle(userCard) {
+	const usersInfo = [].find.call(userCard.children, item => 
+		item.className.split(" ").includes("user--info")
+	)
+	usersInfo.classList.toggle("move-up");
 }
