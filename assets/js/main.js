@@ -4,6 +4,7 @@ const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,nam
 // User's List
 var usersList = [];
 
+const windowWidth = document.body.clientWidth;
 
 const select = document.querySelector(".sort--select");
 select.onchange = function(event) { // Add Event Listener
@@ -25,6 +26,7 @@ select.onchange = function(event) { // Add Event Listener
 
 // Modal Window
 const modal = document.querySelector(".modal");
+const body = document.querySelector("body");
 
 const icons = {
 	location: { 
@@ -45,22 +47,6 @@ const icons = {
 	}
 };
 
-const body = document.querySelector("body");
-
-const showModal = () => {
-	modal.style.zIndex = 1;
-	modal.style.opacity = 1;
-	// Disable scroll
-	body.style.overflow = "hidden";
-}
-
-const hideModal = () => {
-	modal.style.zIndex = -1;
-	modal.style.opacity = 0;
-	// Enable scroll
-	body.style.overflow = "auto";
-}
-
 const getUserName = (user) => `${user.name.title} ${user.name.first} ${user.name.last}`;
 
 const getUserLastName = (user) => `${user.name.title} ${user.name.last}`;
@@ -80,18 +66,6 @@ ajax_get(link, function(data) { // Load Users List
 
 
 // User Card
-userCardShowMore = (userNumber) => {
-	const usersInfo = document.querySelector(`.user--${userNumber} > .user--info`);
-	usersInfo.classList.add("move-up");
-}
-
-userCardHideMore = (userNumber) => {
-	// TODO: Move to a function
-	const usersInfo = document.querySelector(`.user--${userNumber} > .user--info`);	
-	usersInfo.classList.remove("move-up");
-}
-
-
 function updateContent() {
 	let html = '';
 	usersList.forEach(function(user, i) {
@@ -112,10 +86,8 @@ function updateContent() {
 	let userCards = document.querySelectorAll(".user");
 	for(let i = 0; i < userCards.length; i++) {
 		userCards[i].onclick = () => showInfo(usersList[i]);
-
-		userCards[i].onmouseover = () => userCardShowMore(i);
-
-		userCards[i].onmouseout = () => userCardHideMore(i);
+		userCards[i].onmouseenter = () => userCardInfoToggle(userCards[i]);
+		userCards[i].onmouseleave = () => userCardInfoToggle(userCards[i]);
 	}
 
 	// Make div.sort visible
@@ -171,4 +143,27 @@ function ajax_get(url, callback) {
 	};
 	xmlhttp.open("GET", url, true);
 	xmlhttp.send();
+}
+
+function userCardInfoToggle(userCard) {
+	const usersInfo = [].find.call(userCard.children, item => 
+		item.className.split(" ").includes("user--info")
+	)
+	usersInfo.classList.toggle("move-up");
+}
+
+function showModal() {
+	modal.style.zIndex = 1;
+	modal.style.opacity = 1;
+	// Disable scroll
+	body.style.overflow = "hidden";
+	body.style.paddingRight = `${document.body.clientWidth - windowWidth}px`;
+}
+
+function hideModal() {
+	modal.style.zIndex = -1;
+	modal.style.opacity = 0;
+	// Enable scroll
+	body.style.overflow = "auto";
+	body.style.paddingRight = "";
 }
