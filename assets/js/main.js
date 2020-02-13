@@ -64,23 +64,6 @@ ajax_get(link, function(data) { // Load Users List
 	updateContent();
 });
 
-function ajax_get(url, callback) {
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-		try {
-			var data = JSON.parse(xmlhttp.responseText);
-		} catch(err) {
-			console.log(err.message + " in " + xmlhttp.responseText);
-			return;
-		}
-		callback(data);
-		}
-	};
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();
-}
-
 
 // User Card
 function updateContent() {
@@ -138,6 +121,28 @@ function showInfo(user) {
 	}
 
 	showModal();
+}
+
+async function fetchData(url) {
+	const response = await fetch(url);
+	return response.json();
+}
+
+function ajax_get(url, callback) {
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		try {
+			var data = JSON.parse(xmlhttp.responseText);
+		} catch(err) {
+			console.log(err.message + " in " + xmlhttp.responseText);
+			return;
+		}
+		callback(data);
+		}
+	};
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
 }
 
 function userCardInfoToggle(userCard) {
