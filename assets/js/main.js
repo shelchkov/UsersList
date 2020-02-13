@@ -4,6 +4,7 @@ const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,nam
 // User's List
 var usersList = [];
 
+const windowWidth = document.body.clientWidth;
 
 const select = document.querySelector(".sort--select");
 select.onchange = function(event) { // Add Event Listener
@@ -25,6 +26,7 @@ select.onchange = function(event) { // Add Event Listener
 
 // Modal Window
 const modal = document.querySelector(".modal");
+const body = document.querySelector("body");
 
 const icons = {
 	location: { 
@@ -44,22 +46,6 @@ const icons = {
 		fallback : "assets/icons/person.png"
 	}
 };
-
-const body = document.querySelector("body");
-
-const showModal = () => {
-	modal.style.zIndex = 1;
-	modal.style.opacity = 1;
-	// Disable scroll
-	body.style.overflow = "hidden";
-}
-
-const hideModal = () => {
-	modal.style.zIndex = -1;
-	modal.style.opacity = 0;
-	// Enable scroll
-	body.style.overflow = "auto";
-}
 
 const getUserName = (user) => `${user.name.title} ${user.name.first} ${user.name.last}`;
 
@@ -159,4 +145,20 @@ function userCardInfoToggle(userCard) {
 		item.className.split(" ").includes("user--info")
 	)
 	usersInfo.classList.toggle("move-up");
+}
+
+function showModal() {
+	modal.style.zIndex = 1;
+	modal.style.opacity = 1;
+	// Disable scroll
+	body.style.overflow = "hidden";
+	body.style.paddingRight = `${document.body.clientWidth - windowWidth}px`;
+}
+
+function hideModal() {
+	modal.style.zIndex = -1;
+	modal.style.opacity = 0;
+	// Enable scroll
+	body.style.overflow = "auto";
+	body.style.paddingRight = "";
 }
