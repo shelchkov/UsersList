@@ -4,7 +4,14 @@ const link = "https://api.randomuser.me/1.0/?results=50&nat=gb,us&inc=gender,nam
 // User's List
 let usersList = [];
 
-const windowWidth = document.body.clientWidth;
+
+// Load Users List
+fetchData(link).then(data => {
+	console.log(data);
+	usersList = data.results;
+	updateContent();
+});
+
 
 // Sort
 let sortDirection = "without";
@@ -57,21 +64,12 @@ const icons = {
 };
 
 const getUserName = (user) => `${user.name.title} ${user.name.first} ${user.name.last}`;
-
 const getUserLastName = (user) => `${user.name.title} ${user.name.last}`;
 
 
 // Hide loading screen after user's list was loaded
 const hideLoadingScreen = () => 
 	document.querySelector(".loading-screen").style.visibility = "hidden";
-
-
-ajax_get(link, function(data) { // Load Users List
-	for(var i = 0; i < data["results"].length; i++) {
-		usersList[usersList.length] = data["results"][i];
-	}
-	updateContent();
-});
 
 
 // User Card
@@ -105,6 +103,7 @@ function updateContent() {
 	hideLoadingScreen();
 }
 
+
 function showInfo(user) {
 	let userInfo = "";
 	const infoBlock = document.querySelector(".modal--info");
@@ -137,23 +136,6 @@ async function fetchData(url) {
 	return response.json();
 }
 
-function ajax_get(url, callback) {
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-		try {
-			var data = JSON.parse(xmlhttp.responseText);
-		} catch(err) {
-			console.log(err.message + " in " + xmlhttp.responseText);
-			return;
-		}
-		callback(data);
-		}
-	};
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();
-}
-
 function userCardInfoToggle(userCard) {
 	const usersInfo = [].find.call(userCard.children, item => 
 		item.className.split(" ").includes("user--info")
@@ -161,6 +143,7 @@ function userCardInfoToggle(userCard) {
 	usersInfo.classList.toggle("move-up");
 }
 
+const windowWidth = document.body.clientWidth;
 function showModal() {
 	modal.style.zIndex = 1;
 	modal.style.opacity = 1;
