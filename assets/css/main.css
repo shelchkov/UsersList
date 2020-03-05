@@ -86,32 +86,34 @@ h1 {
 .sort--label {
 	margin-left: auto;
 	margin-top: 1.2rem;
-	opacity: .8;
 	font-size: 1rem;
+	opacity: .8;
 }
 
 .sort--select {
+	width: 121px;
+	height: 35px;
 	margin: .75rem 2rem .75rem .8rem;
 	padding: .5rem;
-	background: #F1ECE0;
+
 	color: #0C030B;
-	font-family: inherit;
+	background: url("../../assets/icons/arrow.svg") right no-repeat;
 	border-radius: .3rem;
+
 	font-size: .8rem;
+	font-family: inherit;
+	
+	opacity: .8;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	opacity: .8;
-	background-image: url("../../assets/icons/arrow.svg");
-	width: 121px;
-	height: 35px;
 }
 
 .sort--select:focus {
-	outline: none;
 	-webkit-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
+	outline: none;
 }
 
 
