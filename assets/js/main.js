@@ -16,8 +16,8 @@ fetchData(link).then(data => {
 // Sort
 let sortDirection = "without";
 const select = document.querySelector(".sort--select");
-select.onchange = (event) => {
-	const sort = event.target.value;
+select.onchange = function() {
+	const sort = this.value;
 
 	if (sort === sortDirection || sort === "without") return;
 
@@ -68,11 +68,16 @@ const getUserLastName = (user) => `${user.name.title} ${user.name.last}`;
 
 
 // Hide loading screen after user's list was loaded
+const loadingScreen = document.querySelector(".loading-screen")
 const hideLoadingScreen = () => 
-	document.querySelector(".loading-screen").style.visibility = "hidden";
+	loadingScreen.style.visibility = "hidden";
 
 
 // User Card
+const divSort = document.querySelector("div.sort")
+const h1 = document.querySelector("h1")
+const users = document.querySelector(".users")
+
 function updateContent() {
 	let html = '';
 	usersList.forEach(function(user, i) {
@@ -86,8 +91,8 @@ function updateContent() {
 		user_html += '</article>';
 		html += user_html;
 	});
-	document.querySelector(".users").innerHTML = html;
-	document.querySelector("h1").innerHTML = "List of 50 Users";
+	users.innerHTML = html;
+	h1.innerHTML = "List of 50 Users";
 
 	// Click Event Listeners
 	let userCards = document.querySelectorAll(".user");
@@ -98,7 +103,7 @@ function updateContent() {
 	}
 
 	// Make div.sort visible
-	document.querySelector("div.sort").style.visibility = "visible";
+	divSort.style.visibility = "visible";
 
 	hideLoadingScreen();
 }
@@ -143,13 +148,13 @@ function userCardInfoToggle(userCard) {
 	usersInfo.classList.toggle("move-up");
 }
 
-const windowWidth = document.body.clientWidth;
+const windowWidth = body.clientWidth;
 function showModal() {
 	modal.style.zIndex = 1;
 	modal.style.opacity = 1;
 	// Disable scroll
 	body.style.overflow = "hidden";
-	body.style.paddingRight = `${document.body.clientWidth - windowWidth}px`;
+	body.style.paddingRight = `${body.clientWidth - windowWidth}px`;
 }
 
 function hideModal() {
