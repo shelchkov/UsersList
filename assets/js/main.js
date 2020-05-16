@@ -8,6 +8,14 @@ let usersList = [];
 // Load Users List
 fetchData(link).then(data => {
 	console.log(data);
+	if (data.error) {
+		const loadingMessage =
+			document.querySelector(".loading-screen--message")
+		loadingMessage.innerText = data.error + ". Try again."
+
+		return
+	}
+	
 	usersList = data.results;
 	updateContent();
 });
@@ -137,8 +145,12 @@ function showInfo(user) {
 }
 
 async function fetchData(url) {
-	const response = await fetch(url);
-	return response.json();
+	try {
+		const response = await fetch(url);
+		return response.json();
+	} catch (error) {
+		return { error: error.message }
+	}
 }
 
 function userCardInfoToggle(userCard) {
