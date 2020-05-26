@@ -16,10 +16,18 @@ h1 {
 
 .users {
 	margin-top: .3rem;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 }
 
 .user {
@@ -29,12 +37,18 @@ h1 {
 	border-radius: 5px;
 	padding: 0 0 5px 0;
 	margin: 1.25rem;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	text-align: center;
-	flex-direction: column;
-	flex: 1;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
 	-webkit-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
-	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	overflow: hidden;
 	max-height: 11.45rem
@@ -46,7 +60,11 @@ h1 {
 
 .user--info {
 	background-color: #98B8C0;
+	-webkit-transition: -webkit-transform .2s ease-in-out;
+	transition: -webkit-transform .2s ease-in-out;
+	-o-transition: transform .2s ease-in-out;
 	transition: transform .2s ease-in-out;
+	transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
 }
 
 .user--info--name {
@@ -72,11 +90,15 @@ h1 {
 }
 
 .move-up {
-	transform: translateY(-1.8rem);
+	-webkit-transform: translateY(-1.8rem);
+	    -ms-transform: translateY(-1.8rem);
+	        transform: translateY(-1.8rem);
 }
 
 
 .sort {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	visibility: hidden;
 }
@@ -109,7 +131,6 @@ h1 {
 
 .sort--select:focus {
 	-webkit-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
-	-moz-box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	box-shadow: 0px 1px 25px -3px rgba(119,119,119,0.29);
 	outline: none;
 }
@@ -180,7 +201,8 @@ h1 {
 	vertical-align: middle;
 	margin-right: .3rem;
 	width: 1.25rem;
-	filter: invert(36%);
+	-webkit-filter: invert(36%);
+	        filter: invert(36%);
 }
 
 
@@ -191,9 +213,17 @@ h1 {
 	top: 0;
 	bottom: 0;
 
+	display: -webkit-box;
+
+	display: -ms-flexbox;
+
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 }
 
 .loading-screen--message {
