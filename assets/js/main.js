@@ -126,8 +126,9 @@ function showInfo(user) {
 	const infoBlock = document.querySelector(".modal--info");
 	userInfo += `<p class="modal--closeModal modal--closeButton" 
 		title="Close">X</p>`;
-	userInfo +=
-		`<img src=${user.picture.large} alt="${getUserLastName(user)}">`;
+	userInfo += `<div class="modal--info--image">
+		<img src=${user.picture.large} alt="${getUserLastName(user)}">
+		</div>`;
 	const location = `${user.location.street}, ${user.location.city}, 
 		${user.location.state}`;
 	userInfo += `<div class="modal--info--text"><p><img class="icon"
