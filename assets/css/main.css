@@ -169,6 +169,10 @@ h1 {
 	overflow: hidden;
 }
 
+.modal--info--image {
+	height: 132px;
+}
+
 .modal--closeButton {
 	background: #580A15;
 	color: #F1ECE0;
