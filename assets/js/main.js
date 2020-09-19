@@ -85,7 +85,7 @@ function updateContent() {
 	let html = '';
 	usersList.forEach(function(user, i) {
 		let user_html = 
-			`<article class="user user--${i}" title="Show More Info">`;
+			`<article class="user" title="Show More Info">`;
 		user_html += `<div class="user__placeholder">
 			<img class="user__image" src=${user.picture.large}
 			alt="${getUserLastName(user)}"></div>`;
@@ -165,9 +165,9 @@ function userCardInfoToggle(userCard) {
 	usersInfo.classList.toggle("move-up");
 }
 
+const body = document.querySelector("body");
 const windowWidth = body.clientWidth;
 const modal = document.querySelector(".modal");
-const body = document.querySelector("body");
 
 function showModal() {
 	modal.style.zIndex = 1;
