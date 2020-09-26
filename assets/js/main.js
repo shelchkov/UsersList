@@ -6,7 +6,7 @@ let usersList = [];
 
 
 // Load Users List
-fetchData(link).then(data => {
+fetchData(link).then(function(data) {
 	if (data.error) {
 		const loadingMessage =
 			document.querySelector(".loading-screen__message")
@@ -37,12 +37,14 @@ select.onchange = function() {
 	}
 
 	sortDirection = sort;
-	const getUserName = (user) => `${user.name.last} ${user.name.first}`;
+	const getUserName = function(user) {
+		return user.name.last + " " + user.name.first;
+	}
 	const sortDir = sort === "alphabetically" ? 1 : -1
 
-	usersList.sort((a, b) => 
-		sortDir * (getUserName(a) > getUserName(b) ? 1 : -1)
-	);
+	usersList.sort(function(a, b) { 
+		return sortDir * (getUserName(a) > getUserName(b) ? 1 : -1)
+	});
 
 	updateContent();
 };
@@ -50,7 +52,7 @@ select.onchange = function() {
 
 // Modal Window
 const icons = {
-	location: { 
+	location: {
 		url: "assets/icons/location.svg", 
 		fallback : "assets/icons/marker.png"
 	},
@@ -68,13 +70,17 @@ const icons = {
 	}
 };
 
-const getUserName = (user) =>
-	`${user.name.title} ${user.name.first} ${user.name.last}`;
-const getUserLastName = (user) => `${user.name.title} ${user.name.last}`;
+const getUserName = function(user) {
+	return user.name.title + " " + user.name.first + " " + user.name.last;
+}
+
+const getUserLastName = function(user) {
+	return user.name.title + " " + user.name.last;
+}
 
 
 // Hide loading screen after user's list was loaded
-const hideLoadingScreen = () => {
+const hideLoadingScreen = function() {
 	const loadingScreen = document.querySelector(".loading-screen")
 	loadingScreen.style.visibility = "hidden";
 }
@@ -84,15 +90,37 @@ const hideLoadingScreen = () => {
 function updateContent() {
 	let html = '';
 	usersList.forEach(function(user, i) {
-		let user_html = 
-			`<article class="user" title="Show More Info">`;
-		user_html += `<div class="user__placeholder">
-			<img class="user__image" src=${user.picture.large}
-			alt="${getUserLastName(user)}"></div>`;
-		user_html += `<div class="user__info">
-			<h4 class="user__info__name">${getUserName(user)}</h4>
-			<p class="user__info__show-more">Click To See More</p></div>`;
-		user_html += '</article>';
+		const user_html = createElement(
+			"article",
+			{ class: "user", title: "Show More Info" },
+			createElement(
+				"div",
+				{ class: "user__placeholder" },
+				createElement(
+					"img",
+					{
+						class: "user__image",
+						src: user.picture.large,
+						alt: getUserLastName(user)
+					},
+				)
+			),
+			createElement(
+				"div",
+				{ class: "user__info" },
+				createElement(
+					"h4",
+					{ class: "user__info__name" },
+					getUserName(user)
+				),
+				createElement(
+					"p",
+					{ class: "user__info__show-more" },
+					"Click To See More"
+				)
+			)
+		)
+
 		html += user_html;
 	});
 
@@ -103,12 +131,16 @@ function updateContent() {
 
 	// Click Event Listeners
 	let userCards = document.querySelectorAll(".user");
-	for(let i = 0; i < userCards.length; i++) {
-		userCards[i].onclick = () => showInfo(usersList[i]);
-		userCards[i].onmouseenter = () =>
+	for (let i = 0; i < userCards.length; i++) {
+		userCards[i].onclick = function() {
+			showInfo(usersList[i]);
+		}
+		userCards[i].onmouseenter = function() {
 			userCardInfoToggle(userCards[i]);
-		userCards[i].onmouseleave = () =>
+		}
+		userCards[i].onmouseleave = function() {
 			userCardInfoToggle(userCards[i]);
+		}
 	}
 
 	const divSort = document.querySelector("div.sort")
@@ -119,25 +151,53 @@ function updateContent() {
 
 
 function showInfo(user) {
-	let userInfo = "";
+	const closeBtn = createElement(
+		"p",
+		{ class: "modal__closeModal modal__closeButton", title: "Close" },
+		"X"
+	)
+
+	const image = createElement(
+		"div",
+		{ class: "modal__info__image" },
+		createElement(
+			"img",
+			{ src: user.picture.large, alt: getUserLastName(user) }
+		)
+	)
+
+	const location = user.location.street + "," + user.location.city +
+		"," + user.location.state;
+
+	const locationWithIcon = createElement(
+		"div",
+		{ class: "modal__info__text" },
+		createInfoBlockWithIcon(
+			icons.location.url,
+			icons.location.fallback,
+			location
+		),
+		createInfoBlockWithIcon(
+			icons.email.url,
+			icons.email.fallback,
+			user.email
+		),
+		createInfoBlockWithIcon(
+			icons.phone.url,
+			icons.phone.fallback,
+			user.phone
+		),
+		createInfoBlockWithIcon(
+			icons.person.url,
+			icons.person.fallback,
+			getUserName(user)
+		),
+	)
+
+	const userInfo = closeBtn + image + locationWithIcon
+
 	const infoBlock = document.querySelector(".modal__info");
-	userInfo += `<p class="modal__closeModal modal__closeButton"
-		title="Close">X</p>`;
-	userInfo += `<div class="modal__info__image">
-		<img src=${user.picture.large} alt="${getUserLastName(user)}">
-		</div>`;
-	const location = `${user.location.street}, ${user.location.city}, 
-		${user.location.state}`;
-	userInfo += `<div class="modal__info__text"><p><img class="icon"
-		src=${icons.location.url} 
-		onerror="this.src='${icons.location.fallback}'">${location}</p>`;
-	userInfo += `<p><img class="icon" src=${icons.email.url}
-		onerror="this.src='${icons.email.fallback}'">${user.email}</p>`;
-	userInfo += `<p><img class="icon" src=${icons.phone.url}
-		onerror="this.src='${icons.phone.fallback}'">${user.phone}</p>`;
-	userInfo += `<p><img class="icon" src=${icons.person.url} 
-		onerror="this.src='${icons.person.fallback}'">${getUserName(user)}
-		</p></div>`;
+
 	infoBlock.innerHTML = userInfo;
 
 	const closeObjects = document.querySelectorAll(".modal__closeModal");
@@ -159,9 +219,9 @@ async function fetchData(url) {
 }
 
 function userCardInfoToggle(userCard) {
-	const usersInfo = [].find.call(userCard.children, item => 
-		item.className.split(" ").includes("user__info")
-	)
+	const usersInfo = [].find.call(userCard.children, function(item) { 
+		return item.className.split(" ").includes("user__info")
+	})
 	usersInfo.classList.toggle("move-up");
 }
 
@@ -174,7 +234,7 @@ function showModal() {
 	modal.style.opacity = 1;
 	// Disable scroll
 	body.style.overflow = "hidden";
-	body.style.paddingRight = `${body.clientWidth - windowWidth}px`;
+	body.style.paddingRight = body.clientWidth - windowWidth + "px";
 }
 
 function hideModal() {
@@ -183,4 +243,34 @@ function hideModal() {
 	// Enable scroll
 	body.style.overflow = "auto";
 	body.style.paddingRight = "";
+}
+
+function createElement (el, props, ...children) {
+	const propsString = Object.entries(props || {})
+		.reduce(function(acc, [prop, value]) {
+			return acc + " " + prop + '="' + value + '"'
+		}, " ")
+	
+	return "<" + el + propsString + ">" + (children || []).join("") + "</" +
+		el + ">"
+}
+
+function createInfoBlockWithIcon (src, fallback, text) {
+	return createElement(
+		"p",
+		{},
+		createElement(
+			"img",
+			{
+				class: "icon",
+				src,
+				onerror: createImgOnerror(fallback)
+			}
+		),
+		text
+	)
+}
+
+function createImgOnerror (fallback) {
+	return "this.src='" + fallback + "'"
 }
