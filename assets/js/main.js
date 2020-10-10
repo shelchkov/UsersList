@@ -13,8 +13,6 @@ fetchData(link, function(data) {
 	const loadingMessage =
 		document.querySelector(".loading-screen__message")
 	loadingMessage.innerText = "Something went wrong. Try again."
-
-	return
 });
 
 
