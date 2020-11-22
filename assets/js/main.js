@@ -8,7 +8,7 @@ let usersList = [];
 // Load Users List
 fetchData(link, function(data) {
 	usersList = data.results;
-	updateContent();
+	updateContent(true);
 }, function() {
 	const loadingMessage =
 		document.querySelector(".loading-screen__message")
@@ -68,7 +68,7 @@ const icons = {
 
 
 // User Card
-function updateContent() {
+function updateContent(isInitializing) {
 	let html = '';
 	usersList.forEach(function(user) {
 		const user_html = createElement(
@@ -111,8 +111,11 @@ function updateContent() {
 
 	const users = document.querySelector(".users")
 	users.innerHTML = html;
-	const h1 = document.querySelector("h1")
-	h1.innerHTML = "List of 50 Users";
+
+	if (isInitializing) {
+		const h1 = document.querySelector("h1")
+		h1.innerHTML = "List of 50 Users";
+	}
 
 	// Click Event Listeners
 	const userCards = document.querySelectorAll(".user");
@@ -130,10 +133,12 @@ function updateContent() {
 		}
 	}
 
-	const divSort = document.querySelector("div.sort")
-	divSort.style.visibility = "visible";
+	if (isInitializing) {
+		const divSort = document.querySelector("div.sort")
+		divSort.style.visibility = "visible";
 
-	hideLoadingScreen();
+		hideLoadingScreen();
+	}
 }
 
 
