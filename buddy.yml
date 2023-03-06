@@ -1,0 +1,38 @@
+- pipeline: "deploy"
+  on: "EVENT"
+  events:
+  - type: "PUSH"
+    refs:
+    - "refs/heads/master"
+  actions:
+  - action: "Upload via FTP"
+    type: "FTP"
+    host: $FTP_HOST
+    login: $FTP_LOGIN
+    password: $FTP_PASSWORD
+    port: $FTP_PORT
+    input_type: "SCM_REPOSITORY"
+    remote_path: "/htdocs"
+    deployment_excludes:
+    - "examples"
+    - "buddy.yml"
+    - "README.md"
+
+- pipeline: "scheduled deploy"
+  on: "SCHEDULE"
+  refs:
+  - "refs/heads/master"
+  cron: "0 0 6 * *"
+  actions:
+  - action: "Upload via FTP"
+    type: "FTP"
+    host: $FTP_HOST
+    login: $FTP_LOGIN
+    password: $FTP_PASSWORD
+    port: $FTP_PORT
+    input_type: "SCM_REPOSITORY"
+    remote_path: "/htdocs"
+    deployment_excludes:
+    - "/examples"
+    - "buddy.yml"
+    - "README.md"

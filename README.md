@@ -1,6 +1,6 @@
 # 50 Users
 
-[Demo](https://50users.000webhostapp.com/ "Demo")
+[Demo](https://50users.epizy.com/ "Demo")
 
 On the page there's presented a list of 50 users. The list is fetched from the server (random user api). You can sort users by their name.
 
