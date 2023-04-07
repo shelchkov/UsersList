@@ -22,7 +22,7 @@
   on: "SCHEDULE"
   refs:
   - "refs/heads/master"
-  cron: "0 0 6 * *"
+  cron: "0 2 */15 * *"
   actions:
   - action: "Upload via FTP"
     type: "FTP"
